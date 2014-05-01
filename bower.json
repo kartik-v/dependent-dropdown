@@ -7,8 +7,8 @@
     ],
     "description": "A multi level dependent dropdown JQuery plugin that allows nested dependencies.",
     "main": [
-        "./css/star-rating.min.css",
-        "./js/star-rating.min.js"
+        "./js/dependent-dropdown.min.js",
+        "./css/dependent-dropdown.min.css"
     ],
     "keywords": [
         "jquery",
