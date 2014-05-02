@@ -9,11 +9,11 @@ with normal select options and select with optgroups as well.
 
 - Apply the plugin on a select element and set dependency to one or more other input / select elements (including
   dependency nesting).
+- Supports both `select` input with basic `options` and select with `optgroups`.
 - Automatically lock/disable the dependent dropdown until dependent results are available.
 - The plugin uses ajax call to the server to render the list of dependent options.
-- Allows to set a default
 - Allows a loading indicator to be displayed in dependent select until the results are fetched from the server.
-- Display a placeholder
+- Display a placeholder label with an empty value. For `optgroups` automatically disable this option.
 - Triggers JQuery events for advanced development. Events currently available are `depdrop.init`, `depdrop.change`,
   `depdrop.beforeChange`,`depdrop.afterChange`, and  `depdrop.error`.
 - Size of the entire plugin is less than 4KB (about 3KB for the minified JS and 1KB for the minified CSS).
