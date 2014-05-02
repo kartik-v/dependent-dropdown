@@ -132,7 +132,8 @@ Alternatively, you can directly call the plugin options by setting data attribut
 The plugin supports these following options:
 
 ##### depends
-_array_ The list of input `ID` attributes on which the current dropdown is dependent on.
+_array_ The list of parent input `ID` attributes on which the current dropdown is dependent on. DO NOT prepend any hash
+before the input id.
 
 ##### url
 _string_ the ajax url action which will process the dependent list. The server action must return a JSON encoded
