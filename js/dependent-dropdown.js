@@ -73,7 +73,7 @@
             var settings = {
                 url: self.url,
                 type: 'post',
-                data: {id: val},
+                data: {depdrop_parents: val},
                 dataType: 'json',
                 success: function (data) {
                     var selected = isEmpty(data.selected) ? null : data.selected;

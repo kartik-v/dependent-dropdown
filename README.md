@@ -141,14 +141,14 @@ where, the `output` is an array of data for the dependent list of the format `{i
 and `selected` is the default selected value after the dependent dropdown is generated. If you desire a dependent list
 containing optgroups then the `output` must be of the format `{group-name: {id: <option-value>, name: <option-name>}}`.
 
-The plugin passes an array of dependent values as a POST request under a variable name `id`, which can be read by the
+The plugin passes an array of dependent values as a POST request under a variable name `depdrop_parents`, which can be read by the
 server action to generate a dependent dropdown list. An example for a PHP server action could be:
 
 ```php
 public function generateChildren() {
     $out = [];
-    if (isset($_POST['id'])) {
-        $parents = $_POST['id'];
+    if (isset($_POST['depdrop_parents'])) {
+        $parents = $_POST['depdrop_parents'];
         if ($id != null) {
             $out = getSubCatList($parents);
             /*
