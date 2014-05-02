@@ -41,9 +41,9 @@
         this.$element = $(element);
         this.url = options.url;
         this.depends = options.depends;
-        this.emptyMsg = options.emptyMsg;
         this.loading = options.loading;
         this.placeholder = options.placeholder;
+        this.emptyMsg = options.emptyMsg;
         this.init();
     };
 
@@ -66,6 +66,7 @@
                     $.ajax(self.getSettings(value));
                 })
             }
+            self.$element.trigger('depdrop.init');
         },
         getSettings: function (val) {
             var self = this;
@@ -76,7 +77,7 @@
                 dataType: 'json',
                 success: function (data) {
                     var selected = isEmpty(data.selected) ? null : data.selected;
-                    if (data.length === 0) {
+                    if (data == null || data.length === 0) {
                         addOption(self.$element, '', self.emptyMsg, '');
                     }
                     else {
@@ -139,8 +140,8 @@
 
     $.fn.depdrop.defaults = {
         url: '',
-        emptyMsg: 'No data found',
         loading: true,
-        placeholder: ''
+        placeholder: 'Select ...',
+        emptyMsg: 'No data found'
     };
 }(jQuery));
