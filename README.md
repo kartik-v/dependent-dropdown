@@ -152,7 +152,7 @@ public function generateChildren() {
 ```
 
 >NOTE: If you return a null value or an empty array from the server, the plugin will display the `emptyMsg` in the
-dependent dropdown, which will be disabled until it has a valid list of values.
+dependent dropdown. The dependent select will always be disabled until the server returns a valid list of values.
 
 ##### loading
 _boolean_ whether to show a loading progress spin indicator in the dependent select when server is processing the
