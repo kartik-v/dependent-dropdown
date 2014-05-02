@@ -70,7 +70,7 @@ plugin assets (css and js folders) into your project.
 
 ## Usage
 
-Step 1: Load the following assets in your header.
+** Step 1: ** Load the following assets in your header.
 
 ```html
 <link href="path/to/css/dependent-dropdown.min.css" media="all" rel="stylesheet" type="text/css" />
@@ -81,7 +81,7 @@ Step 1: Load the following assets in your header.
 If you noticed, you need to load the `jquery.min.js` in addition to the `dependent-dropdown.min.css` and
 `dependent-dropdown.min.js` for the plugin to work with default settings.
 
-Step 2: Setup your select input markup. NOTE: All select inputs must have a defined `ID` attribute for the plugin to work.
+** Step 2: ** Setup your select input markup. NOTE: All select inputs must have a defined `ID` attribute for the plugin to work.
 
 ```html
 <select id="parent-1">
@@ -97,7 +97,7 @@ Step 2: Setup your select input markup. NOTE: All select inputs must have a defi
 </select>
 ```
 
-Step 3: Initialize the plugin on your page for your dependent dropdowns. For example,
+** Step 3: ** Initialize the plugin on your page for your dependent dropdowns. For example,
 
 ```js
 $("#child-1").depdrop({
@@ -141,7 +141,7 @@ public function generateChildren() {
             $out = getSubCatList($parents);
             /*
              * the `getSubCatList` function can query a db and return array of format
-             * {id: <val>, name: <desc>}, based on the list of parents passed. 
+             * {id: <val>, name: <desc>}, based on the list of parents passed.
              */
             echo json_encode(['output' => $out, 'selected'=>'']);
             return;
