@@ -44,7 +44,7 @@ View the [plugin documentation](http://plugins.krajee.com/dependent-dropdown) an
   - `output` is an array of data for the dependent list of the format
 
   ```
-  {id: <option-value>, name: <option-name>}`,
+  {id: <option-value>, name: <option-name>}
   ```
 
   - `selected` is the default selected value after the dependent dropdown is generated.
