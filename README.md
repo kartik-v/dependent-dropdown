@@ -138,8 +138,11 @@ public function generateChildren() {
     if (isset($_POST['id'])) {
         $parents = $_POST['id'];
         if ($id != null) {
-            $out = getSubCatList($parents); // this function can query a db and return array of format
-                                            // {id: <val>, name: <desc>}, based on the list of parents passed
+            $out = getSubCatList($parents);
+            /*
+             * the `getSubCatList` function can query a db and return array of format
+             * {id: <val>, name: <desc>}, based on the list of parents passed. 
+             */
             echo json_encode(['output' => $out, 'selected'=>'']);
             return;
         }
@@ -152,8 +155,8 @@ public function generateChildren() {
 dependent dropdown, which will be disabled until it has a valid list of values.
 
 ##### loading
-_boolean_ whether to show a loading spinning icon in the dependent select when server is processing the ajax response.
-Defaults to `true`.
+_boolean_ whether to show a loading progress spin indicator in the dependent select when server is processing the
+ajax response. Defaults to `true`.
 
 ##### placeholder
 _string_ whether the dependent select has a default placeholder (with an empty value), when no records are found. You
