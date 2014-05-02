@@ -28,7 +28,7 @@ View the [plugin documentation](http://plugins.krajee.com/dependent-dropdown) an
 
 1. Latest [JQuery](http://jquery.com/)
 2. All select inputs in markup must have a defined `ID` attribute for the plugin to work.
-3. Works currently only with default HTML select input. It is not tested to work with other JQuery plugins that enhance
+3. Tested to work currently with default HTML select input. It is not tested to work with other JQuery plugins that enhance
    the HTML select input (e.g. Select2, multiselect etc.). However, the plugin exposes events, which can be used in
    such situations.
 4. The dependent dropdown is generated using an ajax call and hence requires a web server and web programming language to
