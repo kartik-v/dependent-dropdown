@@ -82,7 +82,7 @@ plugin assets (css and js folders) into your project.
 
 ## Usage
 
-** Step 1: ** Load the following assets in your header.
+**Step 1:** Load the following assets in your header.
 
 ```html
 <link href="path/to/css/dependent-dropdown.min.css" media="all" rel="stylesheet" type="text/css" />
@@ -93,7 +93,7 @@ plugin assets (css and js folders) into your project.
 If you noticed, you need to load the `jquery.min.js` in addition to the `dependent-dropdown.min.css` and
 `dependent-dropdown.min.js` for the plugin to work with default settings.
 
-** Step 2: ** Setup your select input markup. NOTE: All select inputs must have a defined `ID` attribute for the plugin to work.
+**Step 2:** Setup your select input markup. NOTE: All select inputs must have a defined `ID` attribute for the plugin to work.
 
 ```html
 <select id="parent-1">
@@ -109,7 +109,7 @@ If you noticed, you need to load the `jquery.min.js` in addition to the `depende
 </select>
 ```
 
-** Step 3: ** Initialize the plugin on your page for your dependent dropdowns. For example,
+**Step 3:** Initialize the plugin on your page for your dependent dropdowns. For example,
 
 ```js
 $("#child-1").depdrop({
