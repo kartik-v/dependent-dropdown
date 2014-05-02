@@ -2,7 +2,7 @@ dependent-dropdown
 ==================
 
 A multi level dependent dropdown JQuery plugin that allows nested dependencies. The plugin allows you to convert normal
-select inputs, whose options are derived based on value selected in another input/or a group of inputs. It works both  
+select inputs, whose options are derived based on value selected in another input/or a group of inputs. It works both
 with normal select options and select with optgroups as well.
 
 ## Features
