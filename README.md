@@ -159,7 +159,9 @@ public function generateChildren() {
             return;
         }
     }
-    echo json_encode(['output' => '', 'selected'=>'']); // note when output is null, a placeholder is displayed
+    echo json_encode(['output' => '', 'selected'=>'']);
+    // note when a null or empty array is returned, the plugin will display `emptyMsg`
+    // in the dependent dropdown
 }
 ```
 
