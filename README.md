@@ -39,9 +39,21 @@ View the [plugin documentation](http://plugins.krajee.com/dependent-dropdown) an
    {output: <dependent-list>, selected: <default-selected-value>}
    ```
 
-  where, the `output` is an array of data for the dependent list of the format `{id: <option-value>, name: <option-name>}`,
-  and `selected` is the default selected value after the dependent dropdown is generated. If you desire a dependent list
-  containing optgroups then the `output` must be of the format `{group-name: {id: <option-value>, name: <option-name>}}`.
+  where,
+
+  - `output` is an array of data for the dependent list of the format
+
+  ```
+  {id: <option-value>, name: <option-name>}`,
+  ```
+
+  - `selected` is the default selected value after the dependent dropdown is generated.
+
+  If you desire a dependent list  containing `optgroups` then the `output` must be of the format
+
+  ```
+  {group-name: {id: <option-value>, name: <option-name>}}
+  ```
 
 ## Installation
 
