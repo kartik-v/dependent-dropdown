@@ -205,7 +205,7 @@ these parameters:
 
 **Example:**
 ```js
-$('#child-1').on('depdrop.change', function(event, value, count) {
+$('#child-1').on('depdrop.change', function(event, id, value, count) {
     console.log(value);
     console.log(count);
 });
@@ -220,7 +220,7 @@ to the server. This event also allows you to access these parameters:
 
 **Example:**
 ```js
-$('#child-1').on('depdrop.beforeChange', function(event, value) {
+$('#child-1').on('depdrop.beforeChange', function(event, id, value) {
     console.log(value);
 });
 ```
@@ -234,7 +234,7 @@ by the server. This event also allows you to access these parameters:
 
 **Example:**
 ```js
-$('#child-1').on('depdrop.afterChange', function(event, value) {
+$('#child-1').on('depdrop.afterChange', function(event, id, value) {
     console.log(value);
 });
 ```
@@ -248,7 +248,7 @@ the ajax response processed by the server. This event also allows you to access 
 
 **Example:**
 ```js
-$('#child-1').on('depdrop.error', function(event, value) {
+$('#child-1').on('depdrop.error', function(event, id, value) {
     console.log(value);
 });
 ```
