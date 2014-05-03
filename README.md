@@ -199,7 +199,7 @@ $('#input-id').on('depdrop.init', function(event) {
 This event is triggered when the dependent parent input is modified or changed. This event also allows you to access
 these parameters:
 
-- `value`: the dependent rating value after the change (based on the `selected` variable generated in server response).
+- `value`: the parent dependent dropdown value after the change (based on the `selected` variable generated in server response).
 - `count`: the count of options generated in the dependent dropdown.
 
 **Example:**
@@ -214,7 +214,7 @@ $('#child-1').on('depdrop.change', function(event, value, count) {
 This event is triggered when the dependent parent input is modified or changed and before the ajax response is sent
 to the server. This event also allows you to access these parameters:
 
-- `value`: the dependent rating value.
+- `value`: the parent dependent dropdown value.
 
 **Example:**
 ```js
@@ -227,7 +227,7 @@ $('#child-1').on('depdrop.beforeChange', function(event, value) {
 This event is triggered when the dependent parent input is modified or changed and after the ajax response is processed
 by the server. This event also allows you to access these parameters:
 
-- `value`: the dependent rating value.
+- `value`: the parent dependent dropdown value.
 
 **Example:**
 ```js
@@ -240,7 +240,7 @@ $('#child-1').on('depdrop.afterChange', function(event, value) {
 This event is triggered when the dependent parent input is modified or changed and if an error is faced within
 the ajax response processed by the server. This event also allows you to access these parameters:
 
-- `value`: the dependent rating value.
+- `value`: the parent dependent dropdown value.
 
 **Example:**
 ```js
