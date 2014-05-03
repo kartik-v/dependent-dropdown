@@ -196,10 +196,11 @@ $('#input-id').on('depdrop.init', function(event) {
 ```
 
 #### depdrop.change
-This event is triggered when the dependent parent input is modified or changed. This event also allows you to access
+This event is triggered when a dependent parent input is modified or changed. This event also allows you to access
 these parameters:
 
-- `value`: the parent dependent dropdown value after the change (based on the `selected` variable generated in server response).
+- `id`: the parent dependent dropdown element id.
+- `value`: the parent dependent dropdown value.
 - `count`: the count of options generated in the dependent dropdown.
 
 **Example:**
@@ -211,9 +212,10 @@ $('#child-1').on('depdrop.change', function(event, value, count) {
 ```
 
 #### depdrop.beforeChange
-This event is triggered when the dependent parent input is modified or changed and before the ajax response is sent
+This event is triggered when a dependent parent input is modified or changed and before the ajax response is sent
 to the server. This event also allows you to access these parameters:
 
+- `id`: the parent dependent dropdown element id.
 - `value`: the parent dependent dropdown value.
 
 **Example:**
@@ -224,9 +226,10 @@ $('#child-1').on('depdrop.beforeChange', function(event, value) {
 ```
 
 #### depdrop.afterChange
-This event is triggered when the dependent parent input is modified or changed and after the ajax response is processed
+This event is triggered when a dependent parent input is modified or changed and after the ajax response is processed
 by the server. This event also allows you to access these parameters:
 
+- `id`: the parent dependent dropdown element id.
 - `value`: the parent dependent dropdown value.
 
 **Example:**
@@ -237,9 +240,10 @@ $('#child-1').on('depdrop.afterChange', function(event, value) {
 ```
 
 #### depdrop.error
-This event is triggered when the dependent parent input is modified or changed and if an error is faced within
+This event is triggered when a dependent parent input is modified or changed and if an error is faced in 
 the ajax response processed by the server. This event also allows you to access these parameters:
 
+- `id`: the parent dependent dropdown element id.
 - `value`: the parent dependent dropdown value.
 
 **Example:**

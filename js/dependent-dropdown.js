@@ -36,6 +36,55 @@
         });
         return $select.html();
     };
+    var getSettings = function ($element, vUrl, vId, vVal, vPlaceholder) {
+        var $el = $element, url = vUrl, id = vId, val = vVal, placeholder = vPlaceholder, optCount = 0;
+        var settings = {
+            url: url,
+            type: 'post',
+            data: {depdrop_parents: val},
+            dataType: 'json',
+            success: function (data) {
+                var selected = isEmpty(data.selected) ? null : data.selected;
+                if (data == null || data.length === 0) {
+                    addOption($el, '', self.emptyMsg, '');
+                }
+                else {
+                    $el.html(getSelect(data.output, placeholder, selected));
+                    if ($el.find('optgroup').length > 0) {
+                        $el.find('option[value=""]').attr('disabled', 'disabled');
+                    }
+                    $el.val(selected);
+                    if (data.output.length !== 0) {
+                        $el.removeAttr('disabled');
+                    }
+                }
+                optCount = $el.find('option').length;
+                if ($el.find('option[value=""]').length > 0) {
+                    optCount--;
+                }
+                $el.trigger('depdrop.change', [id, $("#" + id).val(), optCount]);
+            }
+        };
+        settings['beforeSend'] = function () {
+            $el.trigger('depdrop.beforeChange', [id, $("#" + id).val()]);
+            $el.attr('disabled', 'disabled');
+            $el.html('');
+            if (self.loading) {
+                $el.addClass('kv-loading');
+            }
+        };
+        settings['error'] = function () {
+            $el.trigger('depdrop.error', [id, $("#" + id).val()]);
+        };
+        settings['complete'] = function () {
+            $el.trigger('depdrop.afterChange', [id, $("#" + id).val()]);
+            if (self.loading) {
+                $el.removeClass('kv-loading');
+            }
+        };
+        return settings;
+    };
+
     // DepDrop public class definition
     var DepDrop = function (element, options) {
         this.$element = $(element);
@@ -63,60 +112,11 @@
                         $id = $('#' + depends[j]);
                         value[j] = $id.val();
                     }
-                    $.ajax(self.getSettings(value));
+                    $.ajax(getSettings(self.$element, self.url, $id.attr('id'), value, self.placeholder));
                 })
             }
             self.$element.trigger('depdrop.init');
         },
-        getSettings: function (val) {
-            var self = this;
-            var settings = {
-                url: self.url,
-                type: 'post',
-                data: {depdrop_parents: val},
-                dataType: 'json',
-                success: function (data) {
-                    var selected = isEmpty(data.selected) ? null : data.selected;
-                    if (data == null || data.length === 0) {
-                        addOption(self.$element, '', self.emptyMsg, '');
-                    }
-                    else {
-                        self.$element.html(getSelect(data.output, self.placeholder, selected));
-                        if (self.$element.find('optgroup').length > 0) {
-                            self.$element.find('option[value=""]').attr('disabled', 'disabled');
-                        }
-                        self.$element.val(selected);
-                        if (data.output.length !== 0) {
-                            self.$element.removeAttr('disabled');
-                        }
-                    }
-                    var optCount = self.$element.find('option').length;
-                    if (self.$element.find('option[value=""]').length > 0) {
-                        optCount--;
-                    }
-                    self.$element.trigger('depdrop.change', [self.$element.val(), optCount]);
-                }
-            };
-            settings['beforeSend'] = function () {
-                self.$element.trigger('depdrop.beforeChange', [self.$element.val()]);
-                self.$element.attr('disabled', 'disabled');
-                self.$element.html('');
-                if (self.loading) {
-                    self.$element.addClass('kv-loading');
-                }
-            };
-            settings['error'] = function () {
-                self.$element.trigger('depdrop.error', [self.$element.val()]);
-            };
-            settings['complete'] = function () {
-                self.$element.trigger('depdrop.afterChange', [self.$element.val()]);
-                if (self.loading) {
-                    self.$element.removeClass('kv-loading');
-                }
-            };
-            return settings;
-        },
-
     };
 
     //Dependent dropdown plugin definition
