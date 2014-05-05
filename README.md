@@ -170,13 +170,17 @@ public function generateChildren() {
 dependent dropdown. The dependent select will always be disabled until the server returns a valid list of values.
 
 ##### loading
-_boolean_ whether to show a loading progress spin indicator in the dependent select when server is processing the
+_boolean_ whether to show a loading progress spin indicator in the child dropdown element when server is processing the
 ajax response. Defaults to `true`.
 
+##### loadingClass
+_string_ the CSS class to attach to the child dropdown element when the server is processing the ajax response. 
+Defaults to `kv-loading`.
+
 ##### placeholder
-_string_ whether the dependent select has a default placeholder (with an empty value), when no records are found. You
-can set this to a label which will be displayed as an empty value. For optgroups this will be a disabled option. If you
-set this to null or empty string , it will not be displayed. Defaults to `Select ...`.
+_string_ whether the child select has a default placeholder. This will create an option with an 
+empty value within the child select element. For optgroups this will be a disabled option. If you 
+set this to `false`, it will not be displayed. Defaults to `Select ...`.
 
 ##### emptyMsg
 _string_ the message to display when the ajax response returned from the server is null or an empty array. Defaults to
