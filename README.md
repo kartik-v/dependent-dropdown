@@ -171,12 +171,16 @@ public function generateChildren() {
 dependent dropdown. The dependent select will always be disabled until the server returns a valid list of values.
 
 ##### loading
-_boolean_ whether to show a loading progress spin indicator in the child dropdown element when server is processing the
-ajax response. Defaults to `true`.
+_boolean_ whether to show a loading progress spin indicator and the loading text in the child dropdown element when server is 
+processing the ajax response. Defaults to `true`.
 
 ##### loadingClass
 _string_ the CSS class to attach to the child dropdown element when the server is processing the ajax response. 
 Defaults to `kv-loading`.
+
+##### loadingText
+_string_ the text to display in the child dropdown element when the server is processing the ajax response. 
+Defaults to `Loading ...`.
 
 ##### placeholder
 _string_ | _boolean_ whether the child select has a default placeholder. This will create an option with an 

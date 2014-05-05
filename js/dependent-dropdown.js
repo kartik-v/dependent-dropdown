@@ -36,8 +36,8 @@
         });
         return $select.html();
     };
-    var getSettings = function ($element, vUrl, vId, vVal, vPlaceholder, vLoading, vLoadingClass) {
-        var $el = $element, url = vUrl, id = vId, val = vVal, placeholder = vPlaceholder, optCount = 0;
+    var getSettings = function ($element, vUrl, vId, vVal, vPlaceholder, vLoading, vLoadingClass, vLoadingText, vEmptyMsg) {
+        var $el = $element, url = vUrl, id = vId, val = vVal, placeholder = vPlaceholder, optCount = 0, emptyMsg = vEmptyMsg;
         var settings = {
             url: url,
             type: 'post',
@@ -46,15 +46,15 @@
             success: function (data) {
                 var selected = isEmpty(data.selected) ? null : data.selected;
                 if (data == null || data.length === 0) {
-                    addOption($el, '', self.emptyMsg, '');
+                    addOption($el, '', emptyMsg, '');
                 }
                 else {
                     $el.html(getSelect(data.output, placeholder, selected));
                     if ($el.find('optgroup').length > 0) {
                         $el.find('option[value=""]').attr('disabled', 'disabled');
                     }
-                    $el.val(selected);
                     if (data.output.length !== 0) {
+                        $el.val(selected);
                         $el.removeAttr('disabled');
                     }
                 }
@@ -71,6 +71,7 @@
             $el.html('');
             if (vLoading) {
                 $el.addClass(vLoadingClass);
+                $el.html('<option id="">' + vLoadingText + '</option>');
             }
         };
         settings['error'] = function () {
@@ -92,6 +93,7 @@
         this.depends = options.depends;
         this.loading = options.loading;
         this.loadingClass = options.loadingClass;
+        this.loadingText = options.loadingText;
         this.placeholder = options.placeholder;
         this.emptyMsg = options.emptyMsg;
         this.init();
@@ -113,7 +115,8 @@
                         $id = $('#' + depends[j]);
                         value[j] = $id.val();
                     }
-                    $.ajax(getSettings(self.$element, self.url, $id.attr('id'), value, self.placeholder, self.loading, self.loadingClass));
+                    $.ajax(getSettings(self.$element, self.url, $id.attr('id'), value,
+                        self.placeholder, self.loading, self.loadingClass, self.loadingText, self.emptyMsg));
                 })
             }
             self.$element.trigger('depdrop.init');
@@ -143,6 +146,7 @@
         url: '',
         loading: true,
         loadingClass: 'kv-loading',
+        loadingText: 'Loading ...',
         placeholder: 'Select ...',
         emptyMsg: 'No data found'
     };
