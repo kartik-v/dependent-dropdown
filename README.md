@@ -179,7 +179,7 @@ _string_ the CSS class to attach to the child dropdown element when the server i
 Defaults to `kv-loading`.
 
 ##### placeholder
-_string_ whether the child select has a default placeholder. This will create an option with an 
+_string_ | _boolean_ whether the child select has a default placeholder. This will create an option with an 
 empty value within the child select element. For optgroups this will be a disabled option. If you 
 set this to `false`, it will not be displayed. Defaults to `Select ...`.
 
