@@ -10,9 +10,10 @@
 
 .kv-loading {
     background-image: url('../img/loading.gif');
-    background-position: right 35px center;
+    background-position: left 10px center;
+    background-color: green;
     background-repeat: no-repeat;
-    z-index: 5000;
+    z-index: 10000;
     cursor: wait;
     opacity: 0.6;
 }
