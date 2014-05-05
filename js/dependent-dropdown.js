@@ -36,7 +36,7 @@
         });
         return $select.html();
     };
-    var getSettings = function ($element, vUrl, vId, vVal, vPlaceholder) {
+    var getSettings = function ($element, vUrl, vId, vVal, vPlaceholder, vLoading) {
         var $el = $element, url = vUrl, id = vId, val = vVal, placeholder = vPlaceholder, optCount = 0;
         var settings = {
             url: url,
@@ -69,7 +69,7 @@
             $el.trigger('depdrop.beforeChange', [id, $("#" + id).val()]);
             $el.attr('disabled', 'disabled');
             $el.html('');
-            if (self.loading) {
+            if (vLoading) {
                 $el.addClass('kv-loading');
             }
         };
@@ -78,7 +78,7 @@
         };
         settings['complete'] = function () {
             $el.trigger('depdrop.afterChange', [id, $("#" + id).val()]);
-            if (self.loading) {
+            if (vLoading) {
                 $el.removeClass('kv-loading');
             }
         };
@@ -112,7 +112,7 @@
                         $id = $('#' + depends[j]);
                         value[j] = $id.val();
                     }
-                    $.ajax(getSettings(self.$element, self.url, $id.attr('id'), value, self.placeholder));
+                    $.ajax(getSettings(self.$element, self.url, $id.attr('id'), value, self.placeholder, self.loading));
                 })
             }
             self.$element.trigger('depdrop.init');
