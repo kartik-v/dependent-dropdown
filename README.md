@@ -127,8 +127,6 @@ $("#child-2").depdrop({
 
 ```
 
-Alternatively, you can directly call the plugin options by setting data attributes to your input fields.
-
 ## Documentation
 
 ### Plugin Options
