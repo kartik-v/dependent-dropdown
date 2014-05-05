@@ -6,4 +6,4 @@
  *
  * For more JQuery plugins visit http://plugins.krajee.com
  * For more Yii related demos visit http://demos.krajee.com
- */ .kv-loading{background-image:url('../img/loading.gif');background-position:left 10px center;background-repeat:no-repeat;z-index:5000;cursor:wait;opacity:.6}
+ */ .kv-loading{background-image:url('../img/loading.gif');background-position:left 10px center;background-repeat:no-repeat;z-index:15000;cursor:wait;opacity:.6}

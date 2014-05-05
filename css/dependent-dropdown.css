@@ -13,7 +13,7 @@
     background-position: left 10px center;
     background-color: green;
     background-repeat: no-repeat;
-    z-index: 10000;
+    z-index: 15000;
     cursor: wait;
     opacity: 0.6;
 }
