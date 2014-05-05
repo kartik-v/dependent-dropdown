@@ -146,4 +146,12 @@
         placeholder: 'Select ...',
         emptyMsg: 'No data found'
     };
+
+    /**
+     * Convert automatically select with class 'depdrop'
+     * into dependent dropdowns.
+     */
+    $(function () {
+        $('select.depdrop').depdrop();
+    });
 }(jQuery));

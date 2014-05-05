@@ -9,6 +9,8 @@ with normal select options and select with optgroups as well.
 
 - Apply the plugin on a select element and set dependency to one or more other input / select elements (including
   dependency nesting).
+- Automatically convert `select` inputs with class `depdrop` to dependent dropdowns. The plugin supports HTML5 
+  data attributes to configure the dependent dropdown options.
 - Supports both `select` input with basic `options` and select with `optgroups`.
 - Automatically lock/disable the dependent dropdown until dependent results are available.
 - The plugin uses ajax call to the server to render the list of dependent options.
@@ -93,23 +95,24 @@ plugin assets (css and js folders) into your project.
 If you noticed, you need to load the `jquery.min.js` in addition to the `dependent-dropdown.min.css` and
 `dependent-dropdown.min.js` for the plugin to work with default settings.
 
-**Step 2:** Setup your select input markup. NOTE: All select inputs must have a defined `ID` attribute for the plugin to work.
+**Step 2:** Setup your select input markup to. Automatically set dependent dropdowns by adding the class `depdrop` and setting data attributes. 
+NOTE: All select inputs must have a defined `ID` attribute for the plugin to work.
 
 ```html
 <select id="parent-1">
    <!-- your select options -->
 </select>
 
-<select id="child-1">
+<select id="child-1" class="depdrop" depends="{'parent-1'}" url="/path/to/child_1_list">
    <!-- your select options -->
 </select>
 
-<select id="child-2">
+<select id="child-2" class="depdrop" depends="{'parent-1, 'child-1'}" url="/path/to/child_2_list">
    <!-- your select options -->
 </select>
 ```
 
-**Step 3:** Initialize the plugin on your page for your dependent dropdowns. For example,
+**Step 2 (Alternative):** You can initialize the plugin via javascript for your dependent dropdowns. For example,
 
 ```js
 $("#child-1").depdrop({
