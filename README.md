@@ -15,6 +15,7 @@ with normal select options and select with optgroups as well.
 - Automatically lock/disable the dependent dropdown until dependent results are available.
 - The plugin uses ajax call to the server to render the list of dependent options.
 - Allows a loading indicator to be displayed in dependent select until the results are fetched from the server.
+- Configure your own loading progress text to be displayed for each dependent dropdown before the results are fetched from the server.
 - Display a placeholder label with an empty value. For `optgroups` automatically disable this option.
 - Triggers JQuery events for advanced development. Events currently available are `depdrop.init`, `depdrop.change`,
   `depdrop.beforeChange`,`depdrop.afterChange`, and  `depdrop.error`.
