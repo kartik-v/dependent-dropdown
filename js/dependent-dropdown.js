@@ -102,7 +102,7 @@
     DepDrop.prototype = {
         constructor: DepDrop,
         init: function () {
-            var self = this, depends = self.depends, $id, value = {}, len = depends.length;
+            var self = this, depends = self.depends, $id, len = depends.length;
             self.$element.attr('disabled', 'disabled');
             if (self.placeholder !== false) {
                 self.$element.find('option[value=""]').remove();
@@ -111,16 +111,23 @@
             for (var i = 0; i < len; i++) {
                 $id = $('#' + depends[i]);
                 $id.on('change', function () {
-                    for (var j = 0; j < len; j++) {
-                        $id = $('#' + depends[j]);
-                        value[j] = $id.val();
-                    }
-                    $.ajax(getSettings(self.$element, self.url, $id.attr('id'), value,
-                        self.placeholder, self.loading, self.loadingClass, self.loadingText, self.emptyMsg));
+                    self.setDependency($id, depends, len);
+                })
+                $(document).ready(function() {
+                    self.setDependency($id, depends, len);
                 })
             }
             self.$element.trigger('depdrop.init');
         },
+        setDependency: function($id, depends, len) {
+            var self = this, value = {};
+            for (var j = 0; j < len; j++) {
+                var $el = $('#' + depends[j]);
+                value[j] = $el.val();
+            }
+            $.ajax(getSettings(self.$element, self.url, $id.attr('id'), value,
+                self.placeholder, self.loading, self.loadingClass, self.loadingText, self.emptyMsg));
+        }
     };
 
     //Dependent dropdown plugin definition
