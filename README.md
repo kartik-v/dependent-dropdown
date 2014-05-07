@@ -198,6 +198,9 @@ The plugin supports these events:
 #### depdrop.init
 This event is triggered when the dependent dropdown is initialized.
 
+#### depdrop.ready
+This event is triggered when the dependent dropdown is initialized with values, after document is loaded and ready.
+
 **Example:**
 ```js
 $('#input-id').on('depdrop.init', function(event) {
