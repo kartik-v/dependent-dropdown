@@ -11,6 +11,7 @@ with normal select options and select with optgroups as well.
   dependency nesting).
 - Automatically convert `select` inputs with class `depdrop` to dependent dropdowns. The plugin supports HTML5 
   data attributes to configure the dependent dropdown options.
+- Initialize dependent dropdowns based on preselected values (useful for update scenario).
 - Supports both `select` input with basic `options` and select with `optgroups`.
 - Automatically lock/disable the dependent dropdown until dependent results are available.
 - The plugin uses ajax call to the server to render the list of dependent options.
@@ -171,6 +172,10 @@ public function generateChildren() {
 >NOTE: If you return a null value or an empty array from the server, the plugin will display the `emptyMsg` in the
 dependent dropdown. The dependent select will always be disabled until the server returns a valid list of values.
 
+##### initialize
+_boolean_ This is an important attribute for a multi-level nested dropdown list. You set this to true for the last child in the nested
+list, so that initial preselected values are refreshed sequentially in the nested hierarchy. Defaults to `false`.
+
 ##### loading
 _boolean_ whether to show a loading progress spin indicator and the loading text in the child dropdown element when server is 
 processing the ajax response. Defaults to `true`.
@@ -215,6 +220,8 @@ these parameters:
 - `id`: the parent dependent dropdown element id.
 - `value`: the parent dependent dropdown value.
 - `count`: the count of options generated in the dependent dropdown.
+- `initVal`: the initial preselected value in the dependent dropdown. 
+   Defaults to `false` if not set.
 
 **Example:**
 ```js
@@ -230,6 +237,8 @@ to the server. This event also allows you to access these parameters:
 
 - `id`: the parent dependent dropdown element id.
 - `value`: the parent dependent dropdown value.
+- `initVal`: the initial preselected value in the dependent dropdown. 
+   Defaults to `false` if not set.
 
 **Example:**
 ```js
@@ -244,6 +253,8 @@ by the server. This event also allows you to access these parameters:
 
 - `id`: the parent dependent dropdown element id.
 - `value`: the parent dependent dropdown value.
+- `initVal`: the initial preselected value in the dependent dropdown. 
+   Defaults to `false` if not set.
 
 **Example:**
 ```js
@@ -258,6 +269,8 @@ the ajax response processed by the server. This event also allows you to access 
 
 - `id`: the parent dependent dropdown element id.
 - `value`: the parent dependent dropdown value.
+- `initVal`: the initial preselected value in the dependent dropdown. 
+   Defaults to `false` if not set.
 
 **Example:**
 ```js

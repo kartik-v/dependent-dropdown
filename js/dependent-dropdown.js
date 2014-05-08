@@ -37,14 +37,15 @@
         return $select.html();
     };
     var getSettings = function ($element, vUrl, vId, vVal, vPlaceholder, vLoading, vLoadingClass, vLoadingText, vEmptyMsg, vInitVal) {
-        var $el = $element, url = vUrl, id = vId, val = vVal, placeholder = vPlaceholder, optCount = 0, emptyMsg = vEmptyMsg;
+        var $el = $element, url = vUrl, id = vId, val = vVal, placeholder = vPlaceholder, optCount = 0, emptyMsg = vEmptyMsg,
+            initVal = vInitVal;
         var settings = {
             url: url,
             type: 'post',
             data: {depdrop_parents: val},
             dataType: 'json',
             success: function (data) {
-                var selected =  (vInitVal === false) ? (isEmpty(data.selected) ? null : data.selected) : vInitVal;
+                var selected =  (initVal === false) ? (isEmpty(data.selected) ? null : data.selected) : initVal;
                 if (data == null || data.length === 0) {
                     addOption($el, '', emptyMsg, '');
                 }
@@ -62,11 +63,11 @@
                 if ($el.find('option[value=""]').length > 0) {
                     optCount--;
                 }
-                $el.trigger('depdrop.change', [id, $("#" + id).val(), optCount]);
+                $el.trigger('depdrop.change', [id, $("#" + id).val(), optCount, initVal]);
             }
         };
         settings['beforeSend'] = function () {
-            $el.trigger('depdrop.beforeChange', [id, $("#" + id).val()]);
+            $el.trigger('depdrop.beforeChange', [id, $("#" + id).val(), initVal]);
             $el.attr('disabled', 'disabled');
             $el.html('');
             if (vLoading) {
@@ -75,10 +76,10 @@
             }
         };
         settings['error'] = function () {
-            $el.trigger('depdrop.error', [id, $("#" + id).val()]);
+            $el.trigger('depdrop.error', [id, $("#" + id).val(), initVal]);
         };
         settings['complete'] = function () {
-            $el.trigger('depdrop.afterChange', [id, $("#" + id).val()]);
+            $el.trigger('depdrop.afterChange', [id, $("#" + id).val(), initVal]);
             if (vLoading) {
                 $el.removeClass(vLoadingClass);
             }
@@ -96,6 +97,7 @@
         this.loadingText = options.loadingText;
         this.placeholder = options.placeholder;
         this.emptyMsg = options.emptyMsg;
+        this.initialize = options.initialize;
         this.init();
     };
 
@@ -113,10 +115,19 @@
                 $id.on('change', function () {
                     self.setDependency($id, depends, len, false);
                 })
-                $(document).ready(function () {
-                    self.setDependency($id, depends, len, val);
-                    self.$element.trigger('depdrop.ready');
-                })
+                if (self.initialize === true) {
+                    $id.on('depdrop.afterChange', function (e, id, val, initVal) {
+                        if (initVal !== false) {
+                            self.setDependency($id, depends, len, val);
+                        }
+                    });
+                }
+                else {
+                    $(document).ready(function () {
+                        self.setDependency($id, depends, len, val);
+                        self.$element.trigger('depdrop.ready');
+                    });
+                }
             }
             self.$element.trigger('depdrop.init');
         },
@@ -156,7 +167,8 @@
         loadingClass: 'kv-loading',
         loadingText: 'Loading ...',
         placeholder: 'Select ...',
-        emptyMsg: 'No data found'
+        emptyMsg: 'No data found',
+        initialize: false
     };
 
     /**
