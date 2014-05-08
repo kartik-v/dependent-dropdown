@@ -173,7 +173,7 @@ public function generateChildren() {
 dependent dropdown. The dependent select will always be disabled until the server returns a valid list of values.
 
 ##### initialize
-_boolean_ This is an important attribute for a multi-level nested dropdown list. You set this to true for the last child in the nested
+_boolean_ This is an important attribute for a multi-level nested dropdown list. You must set this to true for the last child in the nested
 list, so that initial preselected values are refreshed sequentially in the nested hierarchy. Defaults to `false`.
 
 ##### loading
