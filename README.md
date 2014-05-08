@@ -11,7 +11,7 @@ with normal select options and select with optgroups as well.
   dependency nesting).
 - Automatically convert `select` inputs with class `depdrop` to dependent dropdowns. The plugin supports HTML5 
   data attributes to configure the dependent dropdown options.
-- Initialize dependent dropdowns based on preselected values (useful for update scenario).
+- Automatically initialize dependent dropdowns based on preselected values (useful for update scenario).
 - Supports both `select` input with basic `options` and select with `optgroups`.
 - Automatically lock/disable the dependent dropdown until dependent results are available.
 - The plugin uses ajax call to the server to render the list of dependent options.
