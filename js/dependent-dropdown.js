@@ -36,16 +36,16 @@
         });
         return $select.html();
     };
-    var getSettings = function ($element, vUrl, vId, vVal, vPlaceholder, vLoading, vLoadingClass, vLoadingText, vEmptyMsg, vInitVal) {
+    var getSettings = function ($element, vUrl, vId, vVal, vPlaceholder, vLoading, vLoadingClass, vLoadingText, vEmptyMsg, vInitVal, vCallback) {
         var $el = $element, url = vUrl, id = vId, val = vVal, placeholder = vPlaceholder, optCount = 0, emptyMsg = vEmptyMsg,
-            initVal = vInitVal;
+            initVal = vInitVal, callBack = vCallback;
         var settings = {
             url: url,
             type: 'post',
             data: {depdrop_parents: val},
             dataType: 'json',
             success: function (data) {
-                var selected =  (initVal === false) ? (isEmpty(data.selected) ? null : data.selected) : initVal;
+                var selected = (initVal === false) ? (isEmpty(data.selected) ? null : data.selected) : initVal;
                 if (data == null || data.length === 0) {
                     addOption($el, '', emptyMsg, '');
                 }
@@ -80,6 +80,7 @@
         };
         settings['complete'] = function () {
             $el.trigger('depdrop.afterChange', [id, $("#" + id).val(), initVal]);
+            callBack();
             if (vLoading) {
                 $el.removeClass(vLoadingClass);
             }
@@ -87,6 +88,34 @@
         return settings;
     };
 
+    var initDependency = function (j, depends, preset) {
+        var $el = $('#' + depends[j]), value = {}, $id,
+            $elNew = $('#' + depends[j + 1]), len = depends.length;
+        for (i = 0; i <= j; i++) {
+            $id = $('#' + depends[i]);
+            value[j] = $id.val();
+        }
+        var initVal = preset[j + 1];
+        var callBack = function () {
+            if (j < len - 1) {
+                initDependency(j + 1, depends, preset);
+            }
+        };
+        if (j < len) {
+            $.ajax(getSettings($elNew,
+                $elNew.data('url'),
+                $elNew.attr('id'),
+                value,
+                $elNew.data('placeholder'),
+                $elNew.data('loading'),
+                $elNew.data('loadingClass'),
+                $elNew.data('loadingText'),
+                $elNew.data('emptyMsg'),
+                initVal,
+                callBack)
+            );
+        }
+    };
     // DepDrop public class definition
     var DepDrop = function (element, options) {
         this.$element = $(element);
@@ -98,13 +127,24 @@
         this.placeholder = options.placeholder;
         this.emptyMsg = options.emptyMsg;
         this.initialize = options.initialize;
+        this.initData();
         this.init();
     };
 
     DepDrop.prototype = {
         constructor: DepDrop,
+        initData: function () {
+            var self = this;
+            self.$element.data('url', self.url);
+            self.$element.data('depends', self.depends);
+            self.$element.data('placeholder', self.placeholder);
+            self.$element.data('loading', self.loading);
+            self.$element.data('loadingClass', self.loadingClass);
+            self.$element.data('loadingText', self.loadingText);
+            self.$element.data('emptyMsg', self.emptyMsg);
+        },
         init: function () {
-            var self = this, depends = self.depends, $id, len = depends.length, val = self.$element.val();
+            var self = this, depends = self.depends, $id, $el, $elNew = null, len = depends.length, val = self.$element.val(), pValue = {};
             self.$element.attr('disabled', 'disabled');
             if (self.placeholder !== false) {
                 self.$element.find('option[value=""]').remove();
@@ -116,29 +156,30 @@
                     self.setDependency($id, depends, len, false);
                 })
                 if (self.initialize === true) {
-                    $id.on('depdrop.afterChange', function (e, id, val, initVal) {
-                        if (initVal !== false) {
-                            self.setDependency($id, depends, len, val);
+                    for (var j = 0; j < len; j++) {
+                        if (j > 0) {
+                            pValue[j] = $('#' + depends[j]).val();
                         }
-                    });
-                }
-                else {
+                    }
+                    depends[len] = self.$element.attr('id');
+                    pValue[len] = self.$element.val();
+                    var a = depends.join(), b = '';
                     $(document).ready(function () {
-                        self.setDependency($id, depends, len, val);
-                        self.$element.trigger('depdrop.ready');
+                        initDependency(0, depends, pValue);
                     });
                 }
             }
             self.$element.trigger('depdrop.init');
         },
         setDependency: function ($id, depends, len, vInitVal) {
-            var self = this, value = {}, initVal = vInitVal;
+            var self = this, value = {}, initVal = vInitVal, callBack = function () {
+            };
             for (var j = 0; j < len; j++) {
                 var $el = $('#' + depends[j]);
                 value[j] = $el.val();
             }
             $.ajax(getSettings(self.$element, self.url, $id.attr('id'), value,
-                self.placeholder, self.loading, self.loadingClass, self.loadingText, self.emptyMsg, initVal));
+                self.placeholder, self.loading, self.loadingClass, self.loadingText, self.emptyMsg, initVal, callBack));
         }
     };
 
