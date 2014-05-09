@@ -87,21 +87,15 @@
         };
         return settings;
     };
-
     var initDependency = function (j, depends, preset) {
         var $el = $('#' + depends[j]), value = {}, $id,
             $elNew = $('#' + depends[j + 1]), len = depends.length;
         for (i = 0; i <= j; i++) {
             $id = $('#' + depends[i]);
-            value[j] = $id.val();
+            value[i] = $id.val();
         }
         var initVal = preset[j + 1];
-        var callBack = function () {
-            if (j < len - 1) {
-                initDependency(j + 1, depends, preset);
-            }
-        };
-        if (j < len) {
+        if (j < len - 1) {
             $.ajax(getSettings($elNew,
                 $elNew.data('url'),
                 $elNew.attr('id'),
@@ -112,8 +106,10 @@
                 $elNew.data('loadingText'),
                 $elNew.data('emptyMsg'),
                 initVal,
-                callBack)
-            );
+                function () {
+                    initDependency(j + 1, depends, preset);
+                }
+            ));
         }
     };
     // DepDrop public class definition
@@ -142,6 +138,7 @@
             self.$element.data('loadingClass', self.loadingClass);
             self.$element.data('loadingText', self.loadingText);
             self.$element.data('emptyMsg', self.emptyMsg);
+            self.$element.data('initialize', self.initialize);
         },
         init: function () {
             var self = this, depends = self.depends, $id, $el, $elNew = null, len = depends.length, val = self.$element.val(), pValue = {};
@@ -154,21 +151,22 @@
                 $id = $('#' + depends[i]);
                 $id.on('change', function () {
                     self.setDependency($id, depends, len, false);
-                })
-                if (self.initialize === true) {
-                    for (var j = 0; j < len; j++) {
-                        if (j > 0) {
-                            pValue[j] = $('#' + depends[j]).val();
-                        }
-                    }
-                    depends[len] = self.$element.attr('id');
-                    pValue[len] = self.$element.val();
-                    var a = depends.join(), b = '';
-                    $(document).ready(function () {
-                        initDependency(0, depends, pValue);
-                    });
-                }
+                });
             }
+            if (self.initialize === true) {
+                for (var j = 0; j < len; j++) {
+                    if (j > 0) {
+                        pValue[j] = $('#' + depends[j]).val();
+                    }
+                }
+                depends[len] = self.$element.attr('id');
+                pValue[len] = self.$element.val();
+                var a = depends.join(), b = '';
+                $(document).ready(function () {
+                    initDependency(0, depends, pValue);
+                });
+            }
+
             self.$element.trigger('depdrop.init');
         },
         setDependency: function ($id, depends, len, vInitVal) {
