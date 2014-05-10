@@ -173,8 +173,10 @@ public function generateChildren() {
 dependent dropdown. The dependent select will always be disabled until the server returns a valid list of values.
 
 ##### initialize
-_boolean_ This is an important attribute for a multi-level nested dropdown list. You must set this to true for the last child in the nested
-list, so that initial preselected values are refreshed sequentially in the nested hierarchy. Defaults to `false`.
+_boolean_ This is an important attribute if you want to auto initialize and populate the dropdowns by triggering the ajax calls when
+document is loaded. You must set this to `true` only for the last child in the nested dependency list, so that initial preselected values are 
+refreshed sequentially in the nested hierarchy. Defaults to `false`. If this property is not `true` for any dependent dropdown, no ajax 
+calls will be triggered on document load (i.e. the dropdowns will show the default data set by the html markup set on init).
 
 ##### loading
 _boolean_ whether to show a loading progress spin indicator and the loading text in the child dropdown element when server is 

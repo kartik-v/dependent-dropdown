@@ -142,7 +142,9 @@
         },
         init: function () {
             var self = this, depends = self.depends, $id, $el, $elNew = null, len = depends.length, val = self.$element.val(), pValue = {};
-            self.$element.attr('disabled', 'disabled');
+            if (self.$element.find('option').length == 0) {
+                self.$element.attr('disabled', 'disabled');
+            }
             if (self.placeholder !== false) {
                 self.$element.find('option[value=""]').remove();
                 self.$element.prepend('<option value="">' + self.placeholder + '</option>');
