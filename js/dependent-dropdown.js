@@ -57,7 +57,6 @@
                     if (data.output.length !== 0) {
                         $el.val(selected);
                         $el.removeAttr('disabled');
-                        $el.trigger('change');
                     }
                 }
                 optCount = $el.find('option').length;
@@ -171,6 +170,7 @@
         },
         setDependency: function ($id, depends, len, vInitVal) {
             var self = this, value = {}, initVal = vInitVal, callBack = function () {
+                self.$element.trigger('change');
             };
             for (var j = 0; j < len; j++) {
                 var $el = $('#' + depends[j]);
