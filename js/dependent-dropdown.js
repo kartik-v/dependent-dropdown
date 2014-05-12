@@ -141,13 +141,10 @@
             self.$element.data('initialize', self.initialize);
         },
         init: function () {
-            var self = this, depends = self.depends, $id, $el, $elNew = null, len = depends.length, val = self.$element.val(), pValue = {};
-            if (self.$element.find('option').length == 0) {
+            var self = this, depends = self.depends, $id, $el, $elNew = null, len = depends.length, val = self.$element.val(), pValue = {},
+                chkOptions = self.$element.find('option').length;
+            if (chkOptions == 0 || self.$element.find('option[value=""]').length == chkOptions) {
                 self.$element.attr('disabled', 'disabled');
-            }
-            if (self.placeholder !== false) {
-                self.$element.find('option[value=""]').remove();
-                self.$element.prepend('<option value="">' + self.placeholder + '</option>');
             }
             for (var i = 0; i < len; i++) {
                 $id = $('#' + depends[i]);
