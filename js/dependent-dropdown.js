@@ -57,6 +57,7 @@
                     if (data.output.length !== 0) {
                         $el.val(selected);
                         $el.removeAttr('disabled');
+                        $el.trigger('change');
                     }
                 }
                 optCount = $el.find('option').length;
