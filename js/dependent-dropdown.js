@@ -1,6 +1,6 @@
 /*!
  * @copyright &copy; Kartik Visweswaran, Krajee.com, 2014
- * @version 1.0.0
+ * @version 1.2.0
  *
  * A multi level dependent dropdown JQuery plugin. The plugin
  * allows nested and combined dependencies.
@@ -36,13 +36,21 @@
         });
         return $select.html();
     };
-    var getSettings = function ($element, vUrl, vId, vVal, vPlaceholder, vLoading, vLoadingClass, vLoadingText, vEmptyMsg, vInitVal, vCallback) {
+    var getSettings = function ($element, vUrl, vId, vVal, vPlaceholder, vLoading, vLoadingClass, vLoadingText, vEmptyMsg, vInitVal, vCallback, vParams) {
         var $el = $element, url = vUrl, id = vId, val = vVal, placeholder = vPlaceholder, optCount = 0, emptyMsg = vEmptyMsg,
-            initVal = vInitVal, callBack = vCallback;
+            initVal = vInitVal, callBack = vCallback, ajaxData = {depdrop_parents: val};
+        if (!isEmpty(vParams)) {
+            var params = {};
+            for (var i = 0; i < vParams.length; i++) {
+                id = vParams[i];
+                params[id] = $('#' + id).val();
+            }
+            ajaxData = {depdrop_parents: val, depdrop_params: params};
+        }
         var settings = {
             url: url,
             type: 'post',
-            data: {depdrop_parents: val},
+            data: ajaxData,
             dataType: 'json',
             success: function (data) {
                 var selected = (initVal === false) ? (isEmpty(data.selected) ? null : data.selected) : initVal;
@@ -108,7 +116,8 @@
                 initVal,
                 function () {
                     initDependency(j + 1, depends, preset);
-                }
+                },
+                $elNew.data('params')
             ));
         }
     };
@@ -123,6 +132,7 @@
         this.placeholder = options.placeholder;
         this.emptyMsg = options.emptyMsg;
         this.initialize = options.initialize;
+        this.params = options.params;
         this.initData();
         this.init();
     };
@@ -139,6 +149,7 @@
             self.$element.data('loadingText', self.loadingText);
             self.$element.data('emptyMsg', self.emptyMsg);
             self.$element.data('initialize', self.initialize);
+            self.$element.data('params', self.params);
         },
         init: function () {
             var self = this, depends = self.depends, $id, $el, $elNew = null, len = depends.length, val = self.$element.val(), pValue = {},
@@ -177,7 +188,7 @@
                 value[j] = $el.val();
             }
             $.ajax(getSettings(self.$element, self.url, $id.attr('id'), value,
-                self.placeholder, self.loading, self.loadingClass, self.loadingText, self.emptyMsg, initVal, callBack));
+                self.placeholder, self.loading, self.loadingClass, self.loadingText, self.emptyMsg, initVal, callBack, self.params));
         }
     };
 
@@ -207,7 +218,8 @@
         loadingText: 'Loading ...',
         placeholder: 'Select ...',
         emptyMsg: 'No data found',
-        initialize: false
+        initialize: false,
+        params: {}
     };
 
     /**
