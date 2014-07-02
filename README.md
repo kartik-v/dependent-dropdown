@@ -142,16 +142,16 @@ before the input id.
 
 ##### params
 _array_ The list of additional input `ID` attributes, whose values will be parsed and passed to the ajax call. DO NOT 
-prepend  any hash before the input id. When this is setup, the `$_POST` request would contain an array `depdrop_params`
+prepend  any hash before the input id. When this is setup, the `$_POST` request would contain an array named `depdrop_params`
 with the id and values of these input identifiers. For example in PHP you can retrieve this as:
 
 ```php
-    if (!empty($_POST['depdrop_params'])) {
-        foreach ($_POST['depdrop_params'] as $id => $value) {
-            // $id is the input identifier
-            // $value is the value for the input identifier above
-        }
+if (!empty($_POST['depdrop_params'])) {
+    foreach ($_POST['depdrop_params'] as $id => $value) {
+        // $id is the input identifier
+        // $value is the value for the input identifier above
     }
+}
 ```
 
 ##### url
@@ -309,4 +309,3 @@ $('#input-id').depdrop('init');
 ## License
 
 **dependent-dropdown** is released under the BSD 3-Clause License. See the bundled `LICENSE.md` for details.
-
