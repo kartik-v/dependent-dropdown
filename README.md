@@ -5,7 +5,7 @@ A multi level dependent dropdown JQuery plugin that allows nested dependencies. 
 select inputs, whose options are derived based on value selected in another input/or a group of inputs. It works both
 with normal select options and select with optgroups as well.
 
-> NOTE: Version 1.2.0 has been released. Refer the CHANGE LOG for the added features.
+> NOTE: The latest version of the plugin v1.2.0 has been released. Refer the [CHANGE LOG](https://github.com/kartik-v/dependent-dropdown/blob/master/CHANGE.md) for details.
 
 ## Features
 
@@ -146,12 +146,12 @@ prepend  any hash before the input id. When this is setup, the `$_POST` request 
 with the id and values of these input identifiers. For example in PHP you can retrieve this as:
 
 ```php
-if (!empty($_POST['depdrop_params'])) {
-    foreach ($_POST['depdrop_params'] as $id => $value) {
-        // $id is the input identifier
-        // $value is the value for the input identifier above
+    if (!empty($_POST['depdrop_params'])) {
+        foreach ($_POST['depdrop_params'] as $id => $value) {
+            // $id is the input identifier
+            // $value is the value for the input identifier above
+        }
     }
-}
 ```
 
 ##### url
