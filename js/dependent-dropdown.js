@@ -42,8 +42,7 @@
         if (!isEmpty(vParams)) {
             var params = {};
             for (var i = 0; i < vParams.length; i++) {
-                id = vParams[i];
-                params[id] = $('#' + id).val();
+                params[i] = $('#' + vParams[i]).val();
             }
             ajaxData = {depdrop_parents: val, depdrop_params: params};
         }
