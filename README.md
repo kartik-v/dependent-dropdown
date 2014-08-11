@@ -107,11 +107,11 @@ NOTE: All select inputs must have a defined `ID` attribute for the plugin to wor
    <!-- your select options -->
 </select>
 
-<select id="child-1" class="depdrop" depends="{'parent-1'}" url="/path/to/child_1_list">
+<select id="child-1" class="depdrop" depends="['parent-1']" url="/path/to/child_1_list">
    <!-- your select options -->
 </select>
 
-<select id="child-2" class="depdrop" depends="{'parent-1, 'child-1'}" url="/path/to/child_2_list">
+<select id="child-2" class="depdrop" depends="['parent-1, 'child-1']" url="/path/to/child_2_list">
    <!-- your select options -->
 </select>
 ```
@@ -120,12 +120,12 @@ NOTE: All select inputs must have a defined `ID` attribute for the plugin to wor
 
 ```js
 $("#child-1").depdrop({
-    depends: {'parent-1'},
+    depends: ['parent-1'],
     url: '/path/to/child_1_list'
 });
 
 $("#child-2").depdrop({
-    depends: {'parent-1', 'child-1'},
+    depends: ['parent-1', 'child-1'],
     url: '/path/to/child_2_list'
 });
 
