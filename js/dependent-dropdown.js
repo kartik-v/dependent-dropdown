@@ -86,11 +86,11 @@
             $el.trigger('depdrop.error', [id, $("#" + id).val(), initVal]);
         };
         settings['complete'] = function () {
-            $el.trigger('depdrop.afterChange', [id, $("#" + id).val(), initVal]);
             callBack();
             if (vLoading) {
                 $el.removeClass(vLoadingClass);
             }
+            $el.trigger('depdrop.afterChange', [id, $("#" + id).val(), initVal]);
         };
         return settings;
     };
