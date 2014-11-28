@@ -1,3 +1,9 @@
+version 1.3.1
+=============
+**Date:** 28-Nov-2014
+
+1. Updated trigger of afterChange event
+
 version 1.3.0
 =============
 **Date:** 08-Nov-2014
