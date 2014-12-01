@@ -3,6 +3,7 @@ version 1.3.1
 **Date:** 28-Nov-2014
 
 1. Updated trigger of afterChange event
+2. Set composer minimum stability to stable.
 
 version 1.3.0
 =============

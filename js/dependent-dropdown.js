@@ -1,6 +1,6 @@
 /*!
  * @copyright &copy; Kartik Visweswaran, Krajee.com, 2014
- * @version 1.3.0
+ * @version 1.3.1
  *
  * A multi level dependent dropdown JQuery plugin. The plugin
  * allows nested and combined dependencies.
