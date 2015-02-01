@@ -1,9 +1,13 @@
-version 1.3.1
+version 1.4.0
 =============
-**Date:** 28-Nov-2014
+**Date:** 01-Feb-2015
 
 1. Updated trigger of afterChange event
 2. Set composer minimum stability to stable.
+3. (enh #10): Enhance ability to use checkbox or radio as the first dependent parent.
+4. (enh #14): Code cleanup and restructure for various JS lint changes (using JSHint Code cleanup library).
+5. (enh #15): Implement reusable constructor for extending plugin if needed.
+6. (enh #16): Enhance Select2 dropdowns to show loading indicator.
 
 version 1.3.0
 =============
