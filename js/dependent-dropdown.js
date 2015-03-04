@@ -39,14 +39,31 @@
             });
             return $select.html();
         },
-        processDep = function ($el, vUrl, vId, vVal, vDef, vLoad, vLoadCss, vLoadMsg, vNullMsg, vInit, vFunc, vPar) {
-            var selected, optCount = 0, ajaxData = {depdrop_parents: vVal}, params = {}, settings;
+        setParams = function (props, vals) {
+            var out = {}, i, key, val;
+            if (props.length === 0) {
+                return {};
+            }
+            for (i = 0; i < props.length; i++) {
+                key = props[i];
+                val = vals[i];
+                out[key] = val;
+            }
+            return out;
+        },
+        processDep = function ($el, vUrl, vId, vVal, vDef, vLoad, vLoadCss, vLoadMsg, vNullMsg, vInit, vFunc, vPar, vDep) {
+            var selected, optCount = 0, params = {}, settings, i, ajaxData = {depdrop_parents: vVal},
+                paramsMain = setParams(vDep, vVal), paramsOther = {}, key, val;
             if (!isEmpty(vPar)) {
-                for (var i = 0; i < vPar.length; i++) {
-                    params[i] = $('#' + vPar[i]).val();
+                for (i = 0; i < vPar.length; i++) {
+                    key = vPar[i];
+                    val = $('#' + vPar[i]).val();
+                    params[i] = val;
+                    paramsOther[key] = val;
                 }
                 ajaxData = {depdrop_parents: vVal, depdrop_params: params};
             }
+            ajaxData.depdrop_all_params = $.extend(paramsMain, paramsOther);
             settings = {
                 url: vUrl,
                 type: 'post',
@@ -117,7 +134,8 @@
                     function () {
                         initDep(j + 1, depends, preset);
                     },
-                    $el.data('params')
+                    $el.data('params'),
+                    depends
                 );
             }
         },
@@ -197,7 +215,8 @@
                 self.emptyMsg,
                 initVal,
                 callBack,
-                self.params
+                self.params,
+                depends
             );
         }
     };

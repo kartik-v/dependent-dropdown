@@ -1,3 +1,9 @@
+version 1.4.1
+=============
+**Date:** 04-Mar-2015
+
+1. (enh #19): New `depdrop_all_params` that will be sent as an associative array (keys & values) to the server ajax action.
+
 version 1.4.0
 =============
 **Date:** 01-Feb-2015
