@@ -1,5 +1,5 @@
 /*!
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014-2015
  * @version 1.4.1
  *
  * Styling for the dependent-dropdown JQuery plugin. 
@@ -17,5 +17,5 @@
 
 .select2-container.kv-loading .select2-chosen {
     background-position: right center;
-    margin-right: 15px!important;
+    margin-right: 15px !important;
 }
