@@ -3,6 +3,7 @@ version 1.4.1
 **Date:** 04-Mar-2015
 
 1. (enh #19): New `depdrop_all_params` that will be sent as an associative array (keys & values) to the server ajax action.
+2. (enh #20): Ability to configure `id` and `name` param names in json response.
 
 version 1.4.0
 =============
