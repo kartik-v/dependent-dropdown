@@ -99,7 +99,8 @@
             self.processDep($elInit, $elCurr.attr('id'), value, initVal, callBack, depends);
         },
         initDep: function (j, depends, preset) {
-            var self = this, value = {}, i, initVal = preset[j + 1], $el = $('#' + depends[j + 1]),
+            var self = this, value = {}, i, initVal = preset[j + 1], 
+                $el = $('#' + depends[j + 1]), id = $el.attr('id'),
                 len = depends.length, callBack = function () {
                     self.initDep(j + 1, depends, preset);
                 };
@@ -107,7 +108,7 @@
                 value[i] = $('#' + depends[i]).val();
             }
             if (j < len - 1) {
-                self.processDep($el, value, initVal, callBack, depends);
+                self.processDep($el, id, value, initVal, callBack, depends);
             }
         },
         processDep: function ($el, vId, vVal, vInit, vFunc, vDep) {
