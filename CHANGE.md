@@ -1,10 +1,11 @@
 version 1.4.1
 =============
-**Date:** 20-Apr-2015
+**Date:** 22-May-2015
 
 1. (enh #19): New `depdrop_all_params` that will be sent as an associative array (keys & values) to the server ajax action.
 2. (enh #20): Ability to configure `id` and `name` param names in json response.
 3. (bug kartik-v/yii2-widget-depdrop#10): Fix process dependency params.
+4. (enh #22): Fixes for JQuery v2.1.4 & Select2.
 
 version 1.4.0
 =============

@@ -3,7 +3,7 @@
     "description": "A multi level dependent dropdown JQuery plugin that allows nested dependencies.",
     "keywords": ["jquery", "dependent", "dropdown", "select", "option"],
     "homepage": "https://github.com/kartik-v/dependent-dropdown",
-    "license": "BSD 3-Clause",
+    "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "Kartik Visweswaran",
