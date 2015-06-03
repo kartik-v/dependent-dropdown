@@ -1,3 +1,10 @@
+version 1.4.2
+=============
+**Date:** 04-Jun-2015
+
+1. (enh #23): New property `initDepends` to set all dependent parents in the chain.
+2. (enh #24): Enhancement for Select2 plugin.
+
 version 1.4.1
 =============
 **Date:** 22-May-2015

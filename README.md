@@ -11,7 +11,7 @@ A multi level dependent dropdown JQuery plugin that allows nested dependencies. 
 select inputs, whose options are derived based on value selected in another input/or a group of inputs. It works both
 with normal select options and select with optgroups as well.
 
-> NOTE: The latest version of the plugin v1.4.1 has been released. Refer the [CHANGE LOG](https://github.com/kartik-v/dependent-dropdown/blob/master/CHANGE.md) for details.
+> NOTE: The latest version of the plugin v1.4.2 has been released. Refer the [CHANGE LOG](https://github.com/kartik-v/dependent-dropdown/blob/master/CHANGE.md) for details.
 
 ## Features
 
@@ -145,6 +145,23 @@ The plugin supports these following options:
 ##### depends
 _array_ The list of parent input `ID` attributes on which the current dropdown is dependent on. DO NOT prepend any hash
 before the input id.
+
+##### initDepends
+_array_ The list of INITIAL nested parent input `ID` attributes on which the current dropdown is dependent on. This is applicable only when `initialize` is set to `true` (for firing the ajax requests on page initialization). The ajax requests will be fired in sequence based on these dependent ids. DO NOT prepend any hash before the input id. If not set, this will default to `depends`. For example you could use `depends` and `initDepends` in the following manner:
+
+```js
+$("#child-1").depdrop({
+    depends: ['parent-1'],
+    url: '/path/to/child_1_list'
+});
+
+$("#child-2").depdrop({
+    depends: ['child-1'], // dependent only on child-1
+    initDepends: ['parent-1', 'child-1'], // initial ajax loading will be fired first for parent-1 and then child-1
+    initialize: true,
+    url: '/path/to/child_2_list'
+});
+```
 
 ##### params
 _array_ The list of additional input `ID` attributes, whose values will be parsed and passed to the ajax call. DO NOT 
