@@ -143,11 +143,11 @@ $("#child-2").depdrop({
 The plugin supports these following options:
 
 ##### depends
-_array_ The list of parent input `ID` attributes on which the current dropdown is dependent on. DO NOT prepend any hash
+_array_ the list of parent input `ID` attributes on which the current dropdown is dependent on. DO NOT prepend any hash
 before the input id.
 
 ##### initDepends
-_array_ The list of INITIAL nested parent input `ID` attributes on which the current dropdown is dependent on. This is applicable only when `initialize` is set to `true` (for firing the ajax requests on page initialization). The ajax requests will be fired in sequence based on these dependent ids. DO NOT prepend any hash before the input id. If not set, this will default to `depends`. For example you could use `depends` and `initDepends` in the following manner:
+_array_ the list of INITIAL nested parent input`ID` attributes on which the current dropdown is dependent on. This is applicable only when`initialize` is set to`true` (for firing the ajax requests on page initialization). Usually you may set it to the topmost parent in the hierarchy while initializing, unless you have complex multiple many to many dependencies. The ajax requests will be fired in sequence based on these dependent ids. DO NOT prepend any hash before the input id. If not set, this will default to`depends`. For example you could use`depends` and`initDepends` in the following manner:
 
 ```js
 $("#child-1").depdrop({
@@ -157,14 +157,19 @@ $("#child-1").depdrop({
 
 $("#child-2").depdrop({
     depends: ['child-1'], // dependent only on child-1
-    initDepends: ['parent-1', 'child-1'], // initial ajax loading will be fired first for parent-1 and then child-1
+    url: '/path/to/child_1_list'
+});
+
+$("#child-3").depdrop({
+    depends: ['child-2'], // dependent only on child-2
+    initDepends: ['parent-1'], // initial ajax loading will be fired first for parent-1, then child-1, and child-2
     initialize: true,
     url: '/path/to/child_2_list'
 });
 ```
 
 ##### params
-_array_ The list of additional input `ID` attributes, whose values will be parsed and passed to the ajax call. DO NOT 
+_array_ the list of additional input `ID` attributes, whose values will be parsed and passed to the ajax call. DO NOT 
 prepend  any hash before the input id. When this is setup, the `$_POST` request would contain an array named `depdrop_params`
 with the values of these input identifiers. For example in PHP you can retrieve this as:
 

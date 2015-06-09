@@ -64,17 +64,18 @@
             }
             for (var i = 0; i < len; i++) {
                 $id = $('#' + depends[i]);
-                $id.on('depdrop.change change select2:select', function (e) {
+                $id.on('depdrop.change change select2:select krajeeselect2:cleared', function (e) {
                     if (!isEmpty($id.data('select2')) && e.type === 'change') {
-                        return false;
+                        return;
                     }
-                    self.setDep($id, depends, len, false);
+                    self.setDep($id, depends, len, $el.val());
                 });
-                if (self.initialize === true) {
+            }
+            if (self.initialize === true) {
+                for (var i = 0; i < initDepends.length; i++) {
                     $('#' + initDepends[i]).trigger('depdrop.change');
                 }
-            }
-            
+            }            
             $el.trigger('depdrop.init');
         },
         setDep: function ($elCurr, depends, len, vInit) {
