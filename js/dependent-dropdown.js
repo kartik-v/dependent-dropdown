@@ -1,5 +1,5 @@
 /*!
- * @copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2015
+ * @copyright &copy; Kartik Visweswaran, Krajee.com, 2013 - 2015
  * @version 1.4.2
  *
  * A multi level dependent dropdown JQuery plugin. The plugin

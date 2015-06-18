@@ -77,11 +77,11 @@ You can use the `bower` package manager to install. Run:
 ### Using Composer
 You can use the `composer` package manager to install. Either run:
 
-    $ php composer.phar require kartik-v/dependent-dropdown "dev-master"
+    $ php composer.phar require kartik-v/dependent-dropdown "@dev"
 
 or add:
 
-    "kartik-v/dependent-dropdown": "dev-master"
+    "kartik-v/dependent-dropdown": "@dev"
 
 to your composer.json file
 
