@@ -13,8 +13,11 @@
     var isEmpty = function (value, trim) {
             return value === null || value === undefined || value.length === 0 || (trim && $.trim(value) === '');
         },
-        addOption = function ($el, id, name, sel) {
+        addOption = function ($el, id, name, sel, disabled) {
             var settings = {value: id, text: name};
+            if(disabled===true) {
+                settings.disabled = true;                
+            }
             if (id === sel && sel !== null) {
                 settings.selected = "selected";
             }
@@ -147,7 +150,7 @@
             $.ajax(settings);
         },
         getSelect: function (data, placeholder, defVal) {
-            var self = this, $select = $("<select>"), idParam = self.idParam, nameParam = self.nameParam;
+            var self = this, $select = $("<select>"), idParam = self.idParam, nameParam = self.nameParam, disabledParam = self.disabledParam;
             if (placeholder !== false) {
                 addOption($select, "", placeholder, defVal);
             }
@@ -156,7 +159,7 @@
             }
             $.each(data, function (i, groups) {
                 if (groups[idParam]) {
-                    addOption($select, groups[idParam], groups[nameParam], defVal);
+                    addOption($select, groups[idParam], groups[nameParam], defVal, groups[disabledParam]);
                 }
                 else {
                     var $group = $('<optgroup>', {label: i});
@@ -199,6 +202,7 @@
         initialize: false,
         idParam: 'id',
         nameParam: 'name',
+        disabledParam: 'disabled',
         params: {}
     };
 
