@@ -15,7 +15,7 @@
         },
         addOption = function ($el, id, name, sel) {
             var settings = {value: id, text: name};
-            if (id === sel && sel !== null) {
+            if (id.toString() === sel && sel !== null) {
                 settings.selected = "selected";
             }
             $("<option/>", settings).appendTo($el);
@@ -125,7 +125,7 @@
                             $el.find('option[value=""]').attr('disabled', 'disabled');
                         }
                         if (data.output.length !== 0) {
-                            $el.val(selected).removeAttr('disabled');
+                            $el.removeAttr('disabled');
                         }
                     }
                     optCount = $el.find('option').length;
