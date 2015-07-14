@@ -1,3 +1,10 @@
+version 1.4.3
+=============
+**Date:** 14-Jul-2015
+
+1. (enh #27): Better validation for value selected.
+2. (enh #28): Ability to configure HTML attributes for each option element via ajax.
+
 version 1.4.2
 =============
 **Date:** 18-Jun-2015

@@ -11,7 +11,7 @@ A multi level dependent dropdown JQuery plugin that allows nested dependencies. 
 select inputs, whose options are derived based on value selected in another input/or a group of inputs. It works both
 with normal select options and select with optgroups as well.
 
-> NOTE: The latest version of the plugin v1.4.2 has been released. Refer the [CHANGE LOG](https://github.com/kartik-v/dependent-dropdown/blob/master/CHANGE.md) for details.
+> NOTE: The latest version of the plugin v1.4.3 has been released. Refer the [CHANGE LOG](https://github.com/kartik-v/dependent-dropdown/blob/master/CHANGE.md) for details.
 
 ## Features
 
@@ -29,7 +29,7 @@ with normal select options and select with optgroups as well.
 - Triggers JQuery events for advanced development. Events currently available are `depdrop.init`, `depdrop.change`,
   `depdrop.beforeChange`,`depdrop.afterChange`, and  `depdrop.error`.
 - Size of the entire plugin is less than 4KB (about 3KB for the minified JS and 1KB for the minified CSS).
-
+- Ability to configure HTML attributes of each `option` element via ajax response (for example dynamically disabling some dropdown options or adding styles).
 
 ## Demo
 
@@ -351,4 +351,3 @@ $('#input-id').depdrop('init');
 ## License
 
 **dependent-dropdown** is released under the BSD 3-Clause License. See the bundled `LICENSE.md` for details.
-
