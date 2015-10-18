@@ -159,7 +159,7 @@
                 data = {};
             }
             $.each(data, function (i, groups) {
-                if (groups[idParam]) {
+                if (typeof groups[idParam] !== 'undefined') {
                     options = groups.options || {};
                     addOption($select, groups[idParam], groups[nameParam], defVal, options);
                 }
