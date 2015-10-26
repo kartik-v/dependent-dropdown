@@ -20,7 +20,7 @@
             if (sel !== null && sel.length && id.toString() === sel) {
                 settings.selected = "selected";
             }
-            $("<option/>", settings).appendTo($el);
+            $("<option>", settings).appendTo($el);
         },
         setParams = function (props, vals) {
             var out = {}, i, key, val;
@@ -129,6 +129,9 @@
                             $el.find('option[value=""]').attr('disabled', 'disabled');
                         }
                         if (data.output) {
+                            if (selected && $.isArray(selected) && $el.attr('multiple')) {
+                                $el.val(selected);
+                            }
                             $el.removeAttr('disabled');
                         }
                     }
@@ -159,7 +162,7 @@
                 data = {};
             }
             $.each(data, function (i, groups) {
-                if (groups[idParam]) {
+                if (typeof groups[idParam] !== 'undefined') {
                     options = groups.options || {};
                     addOption($select, groups[idParam], groups[nameParam], defVal, options);
                 }
