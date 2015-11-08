@@ -120,6 +120,9 @@
                 },
                 success: function (data) {
                     selected = isEmpty(data.selected) ? (self.initVal === false ? null : self.initVal): data.selected;
+                    if (!isEmpty(data.emptyMsg)) {
+                        vNullMsg = data.emptyMsg;
+                    }
                     if (isEmpty(data)) {
                         addOption($el, '', vNullMsg, '');
                     }
