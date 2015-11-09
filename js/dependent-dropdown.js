@@ -123,20 +123,19 @@
                     if (!isEmpty(data.emptyMsg)) {
                         vNullMsg = data.emptyMsg;
                     }
-                    if (isEmpty(data)) {
-                        addOption($el, '', vNullMsg, '');
+                    if (isEmpty(data) || isEmpty(data.output) || Object.keys(data.output).length == 0) {
+                        $el.html('');
+                        addOption($el, 0, vNullMsg, '');
                     }
                     else {
                         $el.html(self.getSelect(data.output, vDefault, selected));
                         if ($el.find('optgroup').length > 0) {
                             $el.find('option[value=""]').attr('disabled', 'disabled');
                         }
-                        if (data.output) {
-                            if (selected && $.isArray(selected) && $el.attr('multiple')) {
-                                $el.val(selected);
-                            }
-                            $el.removeAttr('disabled');
+                        if (selected && $.isArray(selected) && $el.attr('multiple')) {
+                            $el.val(selected);
                         }
+                        $el.removeAttr('disabled');
                     }
                     optCount = $el.find('option').length;
                     if ($el.find('option[value=""]').length > 0) {
