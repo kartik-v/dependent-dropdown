@@ -66,6 +66,12 @@ View the [plugin documentation](http://plugins.krajee.com/dependent-dropdown) an
   ```
   {group-name: {id: <option-value>, name: <option-name>}}
   ```
+  
+  When no data is available for a specific situation (like error), you can send a custom emptyMsg
+
+  ```
+   {emptyMsg: '<your message>'}
+  ```
 
 ## Installation
 
