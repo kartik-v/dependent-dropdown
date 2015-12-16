@@ -1,48 +1,68 @@
 /*!
  * @copyright &copy; Kartik Visweswaran, Krajee.com, 2013 - 2015
- * @version 1.4.3
+ * @version 1.4.4
  *
- * A multi level dependent dropdown JQuery plugin. The plugin
- * allows nested and combined dependencies.
+ * A multi level dependent dropdown JQuery plugin. The plugin allows nested and combined dependencies.
  * 
  * For more JQuery plugins visit http://plugins.krajee.com
  * For more Yii related demos visit http://demos.krajee.com
  */
-(function ($) {
+(function (factory) {
     "use strict";
-    var isEmpty = function (value, trim) {
-            return value === null || value === undefined || value.length === 0 || (trim && $.trim(value) === '');
-        },
-        addOption = function ($el, id, name, sel, opts) {
-            var settings = {value: id, text: name};
-            opts = opts || {};
-            settings = $.extend(settings, opts);
-            if (sel !== null && sel.length && id.toString() === sel) {
-                settings.selected = "selected";
-            }
-            $("<option>", settings).appendTo($el);
-        },
-        setParams = function (props, vals) {
-            var out = {}, i, key, val;
-            if (props.length === 0) {
-                return {};
-            }
-            for (i = 0; i < props.length; i++) {
-                key = props[i];
-                val = vals[i];
-                out[key] = val;
-            }
-            return out;
-        },
-        DepDrop = function (element, options) {
-            var self = this;
-            self.$element = $(element);
-            $.each(options, function (key, value) {
-                self[key] = value;
-            });
-            self.initData();
-            self.init();
-        };
+    if (typeof define === 'function' && define.amd) { // jshint ignore:line
+        // AMD. Register as an anonymous module.
+        define(['jquery'], factory); // jshint ignore:line
+    } else { // noinspection JSUnresolvedVariable
+        if (typeof module === 'object' && module.exports) { // jshint ignore:line
+            // Node/CommonJS
+            // noinspection JSUnresolvedVariable
+            module.exports = factory(require('jquery')); // jshint ignore:line
+        } else {
+            // Browser globals
+            factory(window.jQuery);
+        }
+    }
+}(function ($) {
+    "use strict";
+
+    $.fn.depdropLocales = {};
+
+    var isEmpty, createOption, setParams, DepDrop;
+
+    isEmpty = function (value, trim) {
+        return value === null || value === undefined || value.length === 0 || (trim && $.trim(value) === '');
+    };
+
+    createOption = function ($el, id, name, sel, opts) {
+        var settings = {value: id, text: name};
+        opts = opts || {};
+        settings = $.extend(settings, opts);
+        if (sel !== null && sel.length && id.toString() === sel) {
+            settings.selected = "selected";
+        }
+        $("<option/>", settings).appendTo($el);
+    };
+
+    setParams = function (props, vals) {
+        var out = {};
+        if (props.length === 0) {
+            return {};
+        }
+        $.each(props, function (key, val) {
+            out[val] = vals[key];
+        });
+        return out;
+    };
+
+    DepDrop = function (element, options) {
+        var self = this;
+        self.$element = $(element);
+        $.each(options, function (key, value) {
+            self[key] = value;
+        });
+        self.initData();
+        self.init();
+    };
 
     DepDrop.prototype = {
         constructor: DepDrop,
@@ -50,36 +70,38 @@
             var self = this, $el = self.$element;
             self.initVal = $el.val();
             $el.data('url', self.url)
-                .data('depends', self.depends)
                 .data('placeholder', self.placeholder)
                 .data('loading', self.loading)
                 .data('loadingClass', self.loadingClass)
                 .data('loadingText', self.loadingText)
                 .data('emptyMsg', self.emptyMsg)
-                .data('initialize', self.initialize)
                 .data('params', self.params);
         },
         init: function () {
-            var self = this, depends = self.depends, $id, $el = self.$element, len = depends.length,
-                pValue = {}, chkOptions = $el.find('option').length, initDepends = self.initDepends || self.depends;
+            var self = this, i, depends = self.depends, $el = self.$element, len = depends.length,
+                chkOptions = $el.find('option').length, initDepends = self.initDepends || self.depends;
             if (chkOptions === 0 || $el.find('option[value=""]').length === chkOptions) {
                 $el.attr('disabled', 'disabled');
             }
-            for (var i = 0; i < len; i++) {
-                $id = $('#' + depends[i]);
-                $id.on('depdrop.change change select2:select krajeeselect2:cleared', function (e) {
-                    if (!isEmpty($id.data('select2')) && e.type === 'change') {
-                        return;
-                    }
-                    self.setDep($id, depends, len);
-                });
+            for (i = 0; i < len; i++) {
+                self.listen(i, depends, len);
             }
             if (self.initialize === true) {
-                for (var i = 0; i < initDepends.length; i++) {
+                for (i = 0; i < initDepends.length; i++) {
                     $('#' + initDepends[i]).trigger('depdrop.change');
                 }
-            }            
+            }
             $el.trigger('depdrop.init');
+        },
+        listen: function (i, depends, len) {
+            var self = this;
+            $('#' + depends[i]).on('depdrop.change change select2:select krajeeselect2:cleared', function (e) {
+                var $select = $(this);
+                if (!isEmpty($select.data('select2')) && e.type === 'change') {
+                    return;
+                }
+                self.setDep($select, depends, len);
+            });
         },
         setDep: function ($elCurr, depends, len) {
             var self = this, $elInit = self.$element, $el, typ, value = {};
@@ -91,10 +113,11 @@
             self.processDep($elInit, $elCurr.attr('id'), value, depends);
         },
         processDep: function ($el, vId, vVal, vDep) {
-            var self = this, selected, optCount = 0, params = {}, settings, i, ajaxData = {depdrop_parents: vVal},
-                paramsMain = setParams(vDep, vVal), paramsOther = {}, key, val, vUrl = $el.data('url'),
-                vDefault = $el.data('placeholder'), vLoad = $el.data('loading'), vLoadCss = $el.data('loadingClass'),
-                vLoadMsg = $el.data('loadingText'), vNullMsg = $el.data('emptyMsg'), vPar = $el.data('params');
+            var self = this, selected, optCount = 0, params = {}, settings, i, ajaxData = {}, vUrl = $el.data('url'),
+                paramsMain = setParams(vDep, vVal), paramsOther = {}, key, val, vDefault = $el.data('placeholder'),
+                vLoad = $el.data('loading'), vLoadCss = $el.data('loadingClass'), vLoadMsg = $el.data('loadingText'),
+                vNullMsg = $el.data('emptyMsg'), vPar = $el.data('params');
+            ajaxData[self.parentParam] = vVal;
             if (!isEmpty(vPar)) {
                 for (i = 0; i < vPar.length; i++) {
                     key = vPar[i];
@@ -102,9 +125,9 @@
                     params[i] = val;
                     paramsOther[key] = val;
                 }
-                ajaxData = {depdrop_parents: vVal, depdrop_params: params};
+                ajaxData[self.otherParam] = params;
             }
-            ajaxData.depdrop_all_params = $.extend(paramsMain, paramsOther);
+            ajaxData[self.allParam] = $.extend(paramsMain, paramsOther);
             settings = {
                 url: vUrl,
                 type: 'post',
@@ -119,23 +142,18 @@
                     }
                 },
                 success: function (data) {
-                    selected = isEmpty(data.selected) ? (self.initVal === false ? null : self.initVal): data.selected;
-                    if (!isEmpty(data.emptyMsg)) {
-                        vNullMsg = data.emptyMsg;
-                    }
-                    if (isEmpty(data) || isEmpty(data.output) || Object.keys(data.output).length == 0) {
-                        $el.html('');
-                        addOption($el, 0, vNullMsg, '');
+                    selected = isEmpty(data.selected) ? (self.initVal === false ? null : self.initVal) : data.selected;
+                    if (isEmpty(data)) {
+                        createOption($el, '', vNullMsg, '');
                     }
                     else {
                         $el.html(self.getSelect(data.output, vDefault, selected));
                         if ($el.find('optgroup').length > 0) {
                             $el.find('option[value=""]').attr('disabled', 'disabled');
                         }
-                        if (selected && $.isArray(selected) && $el.attr('multiple')) {
-                            $el.val(selected);
+                        if (data.output) {
+                            $el.removeAttr('disabled');
                         }
-                        $el.removeAttr('disabled');
                     }
                     optCount = $el.find('option').length;
                     if ($el.find('option[value=""]').length > 0) {
@@ -153,26 +171,27 @@
                     $el.trigger('depdrop.afterChange', [vId, $("#" + vId).val(), self.initVal]);
                 }
             };
+            settings = $.extend(settings, self.ajaxSettings);
             $.ajax(settings);
         },
         getSelect: function (data, placeholder, defVal) {
             var self = this, $select = $("<select>"), idParam = self.idParam, nameParam = self.nameParam, options;
             if (placeholder !== false) {
-                addOption($select, "", placeholder, defVal);
+                createOption($select, "", placeholder, defVal);
             }
             if (isEmpty(data)) {
                 data = {};
             }
             $.each(data, function (i, groups) {
-                if (typeof groups[idParam] !== 'undefined') {
-                    options = groups.options || {};
-                    addOption($select, groups[idParam], groups[nameParam], defVal, options);
+                if (groups[idParam]) {
+                    options = groups[self.optionsParam] || {};
+                    createOption($select, groups[idParam], groups[nameParam], defVal, options);
                 }
                 else {
                     var $group = $('<optgroup>', {label: i});
                     $.each(groups, function (j, option) {
-                        options = option.options || {};
-                        addOption($group, option[idParam], option[nameParam], defVal);
+                        options = option[self.optionsParam] || {};
+                        createOption($group, option[idParam], option[nameParam], defVal, options);
                     });
                     $group.appendTo($select);
                 }
@@ -182,44 +201,66 @@
     };
 
     $.fn.depdrop = function (option) {
-        var args = Array.apply(null, arguments);
+        var args = Array.apply(null, arguments), retvals = [];
         args.shift();
-        return this.each(function () {
-            var $this = $(this),
-                data = $this.data('depdrop'),
-                options = typeof option === 'object' && option;
+        this.each(function () {
+            var self = $(this), data = self.data('depdrop'), options = typeof option === 'object' && option,
+                lang = options.language || self.data('language') || 'en', config = $.fn.depdrop.defaults;
 
             if (!data) {
-                data = new DepDrop(this, $.extend({}, $.fn.depdrop.defaults, options, $(this).data()));
-                $this.data('depdrop', data);
+                if (lang !== 'en' && !isEmpty($.fn.depdropLocales[lang])) {
+                    $.extend(config, $.fn.depdropLocales[lang]);
+                }
+                data = new DepDrop(this, $.extend(config, options, self.data()));
+                self.data('depdrop', data);
             }
 
             if (typeof option === 'string') {
-                data[option].apply(data, args);
+                retvals.push(data[option].apply(data, args));
             }
         });
+        switch (retvals.length) {
+            case 0:
+                return this;
+            case 1:
+                return retvals[0];
+            default:
+                return retvals;
+        }
     };
 
     $.fn.depdrop.defaults = {
+        language: 'en',
         url: '',
+        depends: '',
+        initDepends: '',
         loading: true,
         loadingClass: 'kv-loading',
-        loadingText: 'Loading ...',
-        placeholder: 'Select ...',
-        emptyMsg: 'No data found',
         initialize: false,
         idParam: 'id',
         nameParam: 'name',
-        params: {}
+        optionsParam: 'options',
+        parentParam: 'depdrop_parents',
+        otherParam: 'depdrop_params',
+        allParam: 'depdrop_all_params',
+        params: {},
+        ajaxSettings: {}
     };
+
+    $.fn.depdropLocales.en = {
+        loadingText: 'Loading ...',
+        placeholder: 'Select ...',
+        emptyMsg: 'No data found'
+    };
+
+    $.extend($.fn.depdrop.defaults, $.fn.depdropLocales.en);
 
     $.fn.depdrop.Constructor = DepDrop;
 
     /**
-     * Convert automatically select with class 'depdrop'
-     * into dependent dropdowns.
+     * Convert automatically select with class 'depdrop' into dependent dropdowns.
      */
     $(function () {
         $('select.depdrop').depdrop();
     });
-}(window.jQuery));
+}));
