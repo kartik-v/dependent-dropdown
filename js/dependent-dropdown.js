@@ -37,7 +37,8 @@
         var settings = {value: id, text: name};
         opts = opts || {};
         settings = $.extend(settings, opts);
-        if (sel !== null && sel.length && (id.toString() === sel || $.inArray(id.toString(), sel) > -1 )) {
+        if (sel !== null && sel.length && (id.toString() === sel || 
+            ((sel.constructor === Array) && ($.inArray(id.toString(), sel) > -1)))) {
             settings.selected = "selected";
         }
         $("<option/>", settings).appendTo($el);
