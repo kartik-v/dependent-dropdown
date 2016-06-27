@@ -1,14 +1,16 @@
 /*!
- * @copyright &copy; Kartik Visweswaran, Krajee.com, 2013 - 2015
- * @version 1.4.4
+ * @copyright &copy; Kartik Visweswaran, Krajee.com, 2013 - 2016
+ * http://plugins.krajee.com/dependent-dropdown
  *
- * A multi level dependent dropdown JQuery plugin. The plugin allows nested and combined dependencies.
- * 
- * For more JQuery plugins visit http://plugins.krajee.com
- * For more Yii related demos visit http://demos.krajee.com
+ * Author: Kartik Visweswaran
+ * Copyright: 2014 - 2016, Kartik Visweswaran, Krajee.com
+ *
+ * Licensed under the BSD 3-Clause
+ * https://github.com/kartik-v/dependent-dropdown/blob/master/LICENSE.md
  */
 (function (factory) {
     "use strict";
+    //noinspection JSUnresolvedVariable
     if (typeof define === 'function' && define.amd) { // jshint ignore:line
         // AMD. Register as an anonymous module.
         define(['jquery'], factory); // jshint ignore:line
@@ -34,10 +36,10 @@
     };
 
     createOption = function ($el, id, name, sel, opts) {
-        var settings = {value: id, text: name};
-        opts = opts || {};
-        settings = $.extend(settings, opts);
-        if (sel !== null && sel.length && id.toString() === sel) {
+        var settings = {value: id, text: name}, strId = id.toString();
+        $.extend(true, settings, (opts || {}));
+        if (sel !== null && sel.length && (strId === sel ||
+            ($el.attr('multiple') && (sel instanceof Array) && ($.inArray(strId, sel) > -1)))) {
             settings.selected = "selected";
         }
         $("<option/>", settings).appendTo($el);
@@ -93,6 +95,12 @@
             }
             $el.trigger('depdrop.init');
         },
+        parseDisabled: function () {
+            var self = this;
+            if (self.isDisabled) {
+                self.$element.attr('disabled', 'disabled');
+            }
+        },
         listen: function (i, depends, len) {
             var self = this;
             $('#' + depends[i]).on('depdrop.change change select2:select krajeeselect2:cleared', function (e) {
@@ -102,15 +110,16 @@
                 }
                 self.setDep($select, depends, len);
             });
+            self.parseDisabled();
         },
         setDep: function ($elCurr, depends, len) {
-            var self = this, $elInit = self.$element, $el, typ, value = {};
+            var self = this, $el, type, value = {};
             for (var j = 0; j < len; j++) {
                 $el = $('#' + depends[j]);
-                typ = $el.attr('type');
-                value[j] = (typ === "checkbox" || typ === "radio") ? $el.prop('checked') : $el.val();
+                type = $el.attr('type');
+                value[j] = (type === "checkbox" || type === "radio") ? $el.prop('checked') : $el.val();
             }
-            self.processDep($elInit, $elCurr.attr('id'), value, depends);
+            self.processDep(self.$element, $elCurr.attr('id'), value, depends);
         },
         processDep: function ($el, vId, vVal, vDep) {
             var self = this, selected, optCount = 0, params = {}, settings, i, ajaxData = {}, vUrl = $el.data('url'),
@@ -127,7 +136,7 @@
                 }
                 ajaxData[self.otherParam] = params;
             }
-            ajaxData[self.allParam] = $.extend(paramsMain, paramsOther);
+            ajaxData[self.allParam] = $.extend(true, {}, paramsMain, paramsOther);
             settings = {
                 url: vUrl,
                 type: 'post',
@@ -160,6 +169,7 @@
                         optCount -= 1;
                     }
                     $el.trigger('depdrop.change', [vId, $("#" + vId).val(), optCount, self.initVal]);
+                    self.parseDisabled();
                 },
                 error: function () {
                     $el.trigger('depdrop.error', [vId, $("#" + vId).val(), self.initVal]);
@@ -171,7 +181,7 @@
                     $el.trigger('depdrop.afterChange', [vId, $("#" + vId).val(), self.initVal]);
                 }
             };
-            settings = $.extend(settings, self.ajaxSettings);
+            $.extend(true, settings, self.ajaxSettings);
             $.ajax(settings);
         },
         getSelect: function (data, placeholder, defVal) {
@@ -205,13 +215,14 @@
         args.shift();
         this.each(function () {
             var self = $(this), data = self.data('depdrop'), options = typeof option === 'object' && option,
-                lang = options.language || self.data('language') || 'en', config = $.fn.depdrop.defaults;
+                lang = options.language || self.data('language') || 'en', loc = {}, opts = {};
 
             if (!data) {
                 if (lang !== 'en' && !isEmpty($.fn.depdropLocales[lang])) {
-                    $.extend(config, $.fn.depdropLocales[lang]);
+                    loc = $.fn.depdropLocales[lang];
                 }
-                data = new DepDrop(this, $.extend(config, options, self.data()));
+                $.extend(true, opts, $.fn.depdrop.defaults, $.fn.depdropLocales.en, loc, options, self.data());
+                data = new DepDrop(this, opts);
                 self.data('depdrop', data);
             }
 
@@ -244,6 +255,7 @@
         otherParam: 'depdrop_params',
         allParam: 'depdrop_all_params',
         params: {},
+        isDisabled: false,
         ajaxSettings: {}
     };
 
@@ -252,8 +264,6 @@
         placeholder: 'Select ...',
         emptyMsg: 'No data found'
     };
-
-    $.extend($.fn.depdrop.defaults, $.fn.depdropLocales.en);
 
     $.fn.depdrop.Constructor = DepDrop;
 

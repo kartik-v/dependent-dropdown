@@ -1,9 +1,10 @@
 /*!
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2013 - 2015
- * @version 1.4.4
+ * @copyright &copy; Kartik Visweswaran, Krajee.com, 2013 - 2016
+ * http://plugins.krajee.com/dependent-dropdown
  *
- * Styling for the dependent-dropdown JQuery plugin. 
- * 
- * For more JQuery plugins visit http://plugins.krajee.com
- * For more Yii related demos visit http://demos.krajee.com
+ * Author: Kartik Visweswaran
+ * Copyright: 2014 - 2016, Kartik Visweswaran, Krajee.com
+ *
+ * Licensed under the BSD 3-Clause
+ * https://github.com/kartik-v/dependent-dropdown/blob/master/LICENSE.md
  */.kv-loading,.select2-container .kv-loading{background:url(../img/loading.gif)right 20px center no-repeat;cursor:wait;opacity:.6}.select2-container .kv-loading{background-position:right 0 center}

@@ -1,15 +1,30 @@
 Change Log: `dependent-dropdown`
 ================================
 
+## version 1.4.5
+
+**Date:** 27-Jun-2016
+
+1. (enh #38): Add Italian translations.
+2. (enh #43): Allow multiselect dependency and initializing selected values as an array.
+
 ## version 1.4.4
 
 **Date:** 16-Dec-2015
 
 1. (enh #29): Ability to configure and extend ajax settings
-2. (enh #33): Add language and localization support.
-3. (enh #34): Make all parameter names configurable.
-4. (enh #35): AMD and Node Common JS Support.
-5. (enh #36): Enhance ability to configure HTML attributes for each option.
+2. (enh #32): Add property `emptyMsg`.
+3. (enh #33): Add language and localization support.
+4. (enh #34): Make all parameter names configurable.
+5. (enh #35): AMD and Node Common JS Support.
+6. (enh #36): Enhance ability to configure HTML attributes for each option.
+
+## version 1.4.3
+
+**Date:** 14-Jul-2015
+
+1. (enh #27): Better validation for value selected.
+2. (enh #28): Ability to configure HTML attributes for each option element via ajax.
 
 ## version 1.4.2
 
