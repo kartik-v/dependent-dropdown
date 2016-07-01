@@ -120,6 +120,13 @@ NOTE: All select inputs must have a defined `ID` attribute for the plugin to wor
    <!-- your select options -->
 </select>
 ```
+Due to array data being used for the data-depends attribute, you may need to escape the data like so:
+
+```html
+<select id="child-1" class="depdrop" data-depends="[&quot;parent-1&quot;]" data-url="/path/to/child_1_list">
+   <!-- your select options -->
+</select>
+```
 
 **Step 2 (Alternative):** You can initialize the plugin via javascript for your dependent dropdowns. For example,
 
