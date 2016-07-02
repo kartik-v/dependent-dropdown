@@ -112,11 +112,18 @@ NOTE: All select inputs must have a defined `ID` attribute for the plugin to wor
    <!-- your select options -->
 </select>
 
-<select id="child-1" class="depdrop" depends="['parent-1']" url="/path/to/child_1_list">
+<select id="child-1" class="depdrop" data-depends="['parent-1']" data-url="/path/to/child_1_list">
    <!-- your select options -->
 </select>
 
-<select id="child-2" class="depdrop" depends="['parent-1, 'child-1']" url="/path/to/child_2_list">
+<select id="child-2" class="depdrop" data-depends="['parent-1', 'child-1']" data-url="/path/to/child_2_list">
+   <!-- your select options -->
+</select>
+```
+Due to array data being used for the data-depends attribute, you may need to escape the data like so:
+
+```html
+<select id="child-1" class="depdrop" data-depends="[&quot;parent-1&quot;]" data-url="/path/to/child_1_list">
    <!-- your select options -->
 </select>
 ```
