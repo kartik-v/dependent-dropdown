@@ -38,8 +38,7 @@
     createOption = function ($el, id, name, sel, opts) {
         var settings = {value: id, text: name}, strId = id.toString();
         $.extend(true, settings, (opts || {}));
-        if (sel !== null && sel.length && (strId === sel ||
-            ($el.attr('multiple') && (sel instanceof Array) && ($.inArray(strId, sel) > -1)))) {
+        if (sel !== null && sel.length && sel.indexOf(id.toString()) !== -1) {
             settings.selected = "selected";
         }
         $("<option/>", settings).appendTo($el);
@@ -152,6 +151,9 @@
                 },
                 success: function (data) {
                     selected = isEmpty(data.selected) ? (self.initVal === false ? null : self.initVal) : data.selected;
+                    if(typeof selected ==='string'){
+                        selected = selected.split();
+                    }
                     if (isEmpty(data)) {
                         createOption($el, '', vNullMsg, '');
                     }
