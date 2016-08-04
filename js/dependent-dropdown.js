@@ -37,6 +37,7 @@
 
     createOption = function ($el, id, name, sel, opts) {
         var settings = {value: id, text: name}, strId = id.toString();
+
         $.extend(true, settings, (opts || {}));
         if (sel !== null && sel.length && sel.indexOf(id.toString()) !== -1) {
             settings.selected = "selected";
