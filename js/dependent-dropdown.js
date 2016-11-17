@@ -118,6 +118,8 @@
                 $el = $('#' + depends[j]);
                 type = $el.attr('type');
                 value[j] = (type === "checkbox" || type === "radio") ? $el.prop('checked') : $el.val();
+                if(value[j] == '') return;
+                if(value[j] == $el.data('loadingText')) return;
             }
             self.processDep(self.$element, $elCurr.attr('id'), value, depends);
         },
