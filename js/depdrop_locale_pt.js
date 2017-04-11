@@ -11,7 +11,7 @@
 (function ($) {
     "use strict";
 
-    $.fn.depdropLocales['fr'] = {
+    $.fn.depdropLocales['pt'] = {
         loadingText: 'A carregar ...',
         placeholder: 'Seleccionar ...',
         emptyMsg: 'Dados não encontrados'
