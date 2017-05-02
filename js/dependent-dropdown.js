@@ -1,9 +1,9 @@
 /*!
- * @copyright &copy; Kartik Visweswaran, Krajee.com, 2013 - 2016
+ * @copyright &copy; Kartik Visweswaran, Krajee.com, 2013 - 2017
  * http://plugins.krajee.com/dependent-dropdown
  *
  * Author: Kartik Visweswaran
- * Copyright: 2014 - 2016, Kartik Visweswaran, Krajee.com
+ * Copyright: 2014 - 2017, Kartik Visweswaran, Krajee.com
  *
  * Licensed under the BSD 3-Clause
  * https://github.com/kartik-v/dependent-dropdown/blob/master/LICENSE.md
@@ -90,10 +90,10 @@
             }
             if (self.initialize === true) {
                 for (i = 0; i < initDepends.length; i++) {
-                    $('#' + initDepends[i]).trigger('depdrop.change');
+                    $('#' + initDepends[i]).trigger('depdrop:change');
                 }
             }
-            $el.trigger('depdrop.init');
+            $el.trigger('depdrop:init');
         },
         parseDisabled: function () {
             var self = this;
@@ -103,7 +103,7 @@
         },
         listen: function (i, depends, len) {
             var self = this;
-            $('#' + depends[i]).on('depdrop.change change select2:select krajeeselect2:cleared', function (e) {
+            $('#' + depends[i]).on('depdrop:change change select2:select krajeeselect2:cleared', function (e) {
                 var $select = $(this);
                 if (!isEmpty($select.data('select2')) && e.type === 'change') {
                     return;
@@ -143,7 +143,7 @@
                 data: ajaxData,
                 dataType: 'json',
                 beforeSend: function () {
-                    $el.trigger('depdrop.beforeChange', [vId, $("#" + vId).val(), self.initVal]);
+                    $el.trigger('depdrop:beforeChange', [vId, $("#" + vId).val(), self.initVal]);
                     $el.find('option[selected]').removeAttr('selected');
                     $el.val('').attr('disabled', 'disabled').html('');
                     if (vLoad) {
@@ -168,17 +168,17 @@
                     if ($el.find('option[value=""]').length > 0) {
                         optCount -= 1;
                     }
-                    $el.trigger('depdrop.change', [vId, $("#" + vId).val(), optCount, self.initVal]);
+                    $el.trigger('depdrop:change', [vId, $("#" + vId).val(), optCount, self.initVal]);
                     self.parseDisabled();
                 },
                 error: function () {
-                    $el.trigger('depdrop.error', [vId, $("#" + vId).val(), self.initVal]);
+                    $el.trigger('depdrop:error', [vId, $("#" + vId).val(), self.initVal]);
                 },
                 complete: function () {
                     if (vLoad) {
                         $el.removeClass(vLoadCss);
                     }
-                    $el.trigger('depdrop.afterChange', [vId, $("#" + vId).val(), self.initVal]);
+                    $el.trigger('depdrop:afterChange', [vId, $("#" + vId).val(), self.initVal]);
                 }
             };
             $.extend(true, settings, self.ajaxSettings);
@@ -242,21 +242,21 @@
 
     $.fn.depdrop.defaults = {
         language: 'en',
-        url: '',
         depends: '',
         initDepends: '',
+        url: '',
+        params: {},
+        ajaxSettings: {},
+        initialize: false,
+        isDisabled: false,
         loading: true,
         loadingClass: 'kv-loading',
-        initialize: false,
         idParam: 'id',
         nameParam: 'name',
         optionsParam: 'options',
         parentParam: 'depdrop_parents',
         otherParam: 'depdrop_params',
-        allParam: 'depdrop_all_params',
-        params: {},
-        isDisabled: false,
-        ajaxSettings: {}
+        allParam: 'depdrop_all_params'
     };
 
     $.fn.depdropLocales.en = {

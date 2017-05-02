@@ -24,9 +24,8 @@ A multi level dependent dropdown JQuery plugin that allows nested dependencies. 
 - Allows a loading indicator to be displayed in dependent select until the results are fetched from the server.
 - Configure your own loading progress text to be displayed for each dependent dropdown before the results are fetched from the server.
 - Display a placeholder label with an empty value. For `optgroups` automatically disable this option.
-- Triggers JQuery events for advanced development. Events currently available are `depdrop.init`, `depdrop.change`,
-  `depdrop.beforeChange`,`depdrop.afterChange`, and  `depdrop.error`.
-- Size of the entire plugin is less than 4KB (about 3KB for the minified JS and 1KB for the minified CSS).
+- Triggers JQuery events for advanced development. Events currently available are `depdrop:init`, `depdrop:change`,
+  `depdrop:beforeChange`,`depdrop:afterChange`, and  `depdrop:error`.
 - Ability to configure HTML attributes of each `option` element via ajax response (for example dynamically disabling some dropdown options or adding styles).
 
 ## Documentation and Demo
@@ -99,10 +98,10 @@ plugin assets (css and js folders) into your project.
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="path/to/js/dependent-dropdown.min.js" type="text/javascript"></script>
 <!-- optionally if you need translation for your language then include locale file as mentioned below -->
-<script src="path/to/js/depdrop_locale_<lang>.js"></script>
+<script src="path/to/js/locales/<lang>.js"></script>
 ```
 
-If you noticed, you need to load the `jquery.min.js` in addition to the `dependent-dropdown.min.css` and `dependent-dropdown.min.js` for the plugin to work with default settings. The locale file `depdrop_locale_<lang>.js` can be optionally included for translating for your language if needed.
+If you noticed, you need to load the `jquery.min.js` in addition to the `dependent-dropdown.min.css` and `dependent-dropdown.min.js` for the plugin to work with default settings. The locale file `js/locales/<lang>.js` can be optionally included for translating for your language if needed.
 
 **Step 2:** Setup your select input markup to. Automatically set dependent dropdowns by adding the class `depdrop` and setting data attributes. 
 NOTE: All select inputs must have a defined `ID` attribute for the plugin to work.
