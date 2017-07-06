@@ -103,12 +103,34 @@
         },
         listen: function (i, depends, len) {
             var self = this;
+			var returnAjax = 0;
+			var typ;
+			var value;
             $('#' + depends[i]).on('depdrop:change change select2:select krajeeselect2:cleared', function (e) {
                 var $select = $(this);
                 if (!isEmpty($select.data('select2')) && e.type === 'change') {
                     return;
                 }
-                self.setDep($select, depends, len);
+			if(len > 1 && self.$element.hasClass('dep-false') == true){
+					
+					for (var j = 0; j < len; j++) {
+						$el = $('#' + depends[j]);
+						typ = $el.attr('type');
+						value = (typ === "checkbox" || typ === "radio") ? $el.prop('checked') : $el.val();
+						 if( value === self.loadingText || value  === ''){
+							returnAjax++;
+						 }
+					}
+				}
+				
+				if(returnAjax == 0){
+					returnAjax = 0;
+					self.setDep($select, depends, len);
+				}else{
+					returnAjax = 0;
+					self.$element.html('<option id=""> '+self.emptyMsg+' </option>');
+					return;
+				}
             });
             self.parseDisabled();
         },
