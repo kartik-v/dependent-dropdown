@@ -3,8 +3,11 @@ Change Log: `dependent-dropdown`
 
 ## version 1.4.5
 
-**Date:** 02-May-2017
+**Date:** 11-Jul-2017
 
+- Add package for npm.
+- Add composer branch alias for latest dev-master release.
+- Add github contribution templates. 
 - (enh #63): Collate all locales files within `js/locales` folder.
 - (enh #62): Modify event names to begin with `depdrop:`.
 - (enh #60): Add Portuguese translations.

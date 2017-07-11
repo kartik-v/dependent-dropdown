@@ -1,5 +1,5 @@
 /*!
- * @copyright &copy; Kartik Visweswaran, Krajee.com, 2013 - 2017
+ * dependent-dropdown v1.4.5
  * http://plugins.krajee.com/dependent-dropdown
  *
  * Author: Kartik Visweswaran
