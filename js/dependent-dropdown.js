@@ -40,7 +40,7 @@
         $.extend(true, settings, (opts || {}));
         if (sel !== null && sel.length && (strId === sel ||
             ($el.attr('multiple') && (sel instanceof Array) && ($.inArray(strId, sel) > -1)))) {
-            settings.selected = "selected";
+            settings.attr = {selected: true};
         }
         $("<option/>", settings).appendTo($el);
     };
