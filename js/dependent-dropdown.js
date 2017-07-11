@@ -111,7 +111,8 @@
                 if (!isEmpty($select.data('select2')) && e.type === 'change') {
                     return;
                 }
-			if(len > 1 && self.$element.hasClass('dep-false') == true){
+				if(len > 1 && self.depFalse == true){
+
 					
 					for (var j = 0; j < len; j++) {
 						$el = $('#' + depends[j]);
@@ -278,7 +279,8 @@
         optionsParam: 'options',
         parentParam: 'depdrop_parents',
         otherParam: 'depdrop_params',
-        allParam: 'depdrop_all_params'
+        allParam: 'depdrop_all_params',
+		depFalse: false,				 
     };
 
     $.fn.depdropLocales.en = {
