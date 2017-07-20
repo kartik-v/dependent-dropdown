@@ -164,6 +164,9 @@
                             $el.removeAttr('disabled');
                         }
                     }
+                    if (self.storeAjaxResults) {
+                        self.ajaxResults = data;
+                    }
                     optCount = $el.find('option').length;
                     if ($el.find('option[value=""]').length > 0) {
                         optCount -= 1;
@@ -256,7 +259,9 @@
         optionsParam: 'options',
         parentParam: 'depdrop_parents',
         otherParam: 'depdrop_params',
-        allParam: 'depdrop_all_params'
+        allParam: 'depdrop_all_params',
+        ajaxResults: [],
+        storeAjaxResults: false,
     };
 
     $.fn.depdropLocales.en = {
