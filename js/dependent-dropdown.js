@@ -156,13 +156,16 @@
                         createOption($el, '', vNullMsg, '');
                     }
                     else {
-                        $el.html(self.getSelect(data.output, vDefault, selected));
+                        self.getSelect(data.output, vDefault, selected, $el);
                         if ($el.find('optgroup').length > 0) {
                             $el.find('option[value=""]').attr('disabled', 'disabled');
                         }
                         if (data.output) {
                             $el.removeAttr('disabled');
                         }
+                    }
+                    if (self.storeAjaxResults) {
+                        self.ajaxResults = data;
                     }
                     optCount = $el.find('option').length;
                     if ($el.find('option[value=""]').length > 0) {
@@ -184,10 +187,13 @@
             $.extend(true, settings, self.ajaxSettings);
             $.ajax(settings);
         },
-        getSelect: function (data, placeholder, defVal) {
-            var self = this, $select = $("<select>"), idParam = self.idParam, nameParam = self.nameParam, options;
+        getSelect: function (data, placeholder, defVal, select) {
+            var self = this, idParam = self.idParam, nameParam = self.nameParam, options;
+
+            select.find('option').remove();
+
             if (placeholder !== false) {
-                createOption($select, "", placeholder, defVal);
+                createOption(select, "", placeholder, defVal);
             }
             if (isEmpty(data)) {
                 data = {};
@@ -195,7 +201,7 @@
             $.each(data, function (i, groups) {
                 if (groups[idParam]) {
                     options = groups[self.optionsParam] || {};
-                    createOption($select, groups[idParam], groups[nameParam], defVal, options);
+                    createOption(select, groups[idParam], groups[nameParam], defVal, options);
                 }
                 else {
                     var $group = $('<optgroup>', {label: i});
@@ -203,10 +209,9 @@
                         options = option[self.optionsParam] || {};
                         createOption($group, option[idParam], option[nameParam], defVal, options);
                     });
-                    $group.appendTo($select);
+                    $group.appendTo(select);
                 }
             });
-            return $select.html();
         }
     };
 
@@ -256,7 +261,9 @@
         optionsParam: 'options',
         parentParam: 'depdrop_parents',
         otherParam: 'depdrop_params',
-        allParam: 'depdrop_all_params'
+        allParam: 'depdrop_all_params',
+        ajaxResults: [],
+        storeAjaxResults: false,
     };
 
     $.fn.depdropLocales.en = {
