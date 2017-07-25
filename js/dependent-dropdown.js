@@ -148,8 +148,7 @@
                     selected = $h.isEmpty(data.selected) ? (self.initVal === false ? null : self.initVal) : data.selected;
                     if ($h.isEmpty(data)) {
                         self.createOption($el, '', vNullMsg, '');
-                    }
-                    else {
+                    } else {
                         self.renderSelect(data.output, vDefault, selected, $el);
                         if ($el.find('optgroup').length > 0) {
                             $el.find('option[value=""]').attr('disabled', 'disabled');
@@ -211,8 +210,7 @@
                 if (groups[idParam]) {
                     options = groups[self.optionsParam] || {};
                     self.createOption($select, groups[idParam], groups[nameParam], defVal, options);
-                }
-                else {
+                } else {
                     var $group = $('<optgroup>', {label: i});
                     $.each(groups, function (j, option) {
                         options = option[self.optionsParam] || {};
