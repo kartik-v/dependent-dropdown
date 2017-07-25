@@ -1,6 +1,12 @@
 Change Log: `dependent-dropdown`
 ================================
 
+## version 1.4.7
+
+**Date:** 25-Jul-2017
+
+- (bug #68): Remove obsolete init with `parseDisabled`.
+
 ## version 1.4.6
 
 **Date:** 25-Jul-2017

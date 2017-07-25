@@ -98,7 +98,6 @@
                 }
                 self.setDep($select, depends, len);
             });
-            self.parseDisabled();
         },
         setDep: function ($elCurr, depends, len) {
             var self = this, $el, type, j, value = {};
