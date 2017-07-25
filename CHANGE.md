@@ -5,6 +5,7 @@ Change Log: `dependent-dropdown`
 
 **Date:** 25-Jul-2017
 
+- Empty select input element more correctly in `renderSelect`.
 - (bug #68): Remove obsolete init with `parseDisabled`.
 
 ## version 1.4.6

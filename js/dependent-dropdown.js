@@ -1,5 +1,5 @@
 /*!
- * dependent-dropdown v1.4.6
+ * dependent-dropdown v1.4.7
  * http://plugins.krajee.com/dependent-dropdown
  *
  * Author: Kartik Visweswaran
@@ -198,7 +198,7 @@
         },
         renderSelect: function (data, placeholder, defVal, $select) {
             var self = this, idParam = self.idParam, nameParam = self.nameParam, options;
-            $select.find('option').remove();
+            $select.empty();
             if (placeholder !== false) {
                 self.createOption($select, "", placeholder, defVal);
             }
