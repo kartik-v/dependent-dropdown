@@ -1,6 +1,20 @@
 Change Log: `dependent-dropdown`
 ================================
 
+## version 1.4.6
+
+**Date:** 25-Jul-2017
+
+- Enhance following events  to return ajax parameters for better exception handling.
+  - `depdrop:beforeChange`
+  - `depdrop:change`
+  - `depdrop:error`
+- (enh #67, #66): Add new method `getAjaxResults` to return the last output ajax data.
+- (enh #65, #47): Enhancements for multi select dependency.
+- (enh #64, #51): New property `skipDep` to allow skipping ajax dependency firing when value is empty or set to `loadingText`.
+- (enh #54): Validate `disabled` initial attribute if set.
+- (enh #44): Parse selected value variable type more correctly.
+
 ## version 1.4.5
 
 **Date:** 11-Jul-2017

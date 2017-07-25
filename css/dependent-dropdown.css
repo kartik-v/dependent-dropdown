@@ -1,5 +1,5 @@
 /*!
- * dependent-dropdown v1.4.5
+ * dependent-dropdown v1.4.6
  * http://plugins.krajee.com/dependent-dropdown
  *
  * Author: Kartik Visweswaran
@@ -15,5 +15,5 @@
 }
 
 .select2-container .kv-loading {
-    background-position: right 0px center;
+    background-position: right 0 center;
 }
