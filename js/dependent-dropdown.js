@@ -1,5 +1,5 @@
 /*!
- * dependent-dropdown v1.4.7
+ * dependent-dropdown v1.4.8
  * http://plugins.krajee.com/dependent-dropdown
  *
  * Author: Kartik Visweswaran
@@ -45,6 +45,9 @@
                 out[val] = vals[key];
             });
             return out;
+        },
+        toStr: function(str) {
+            return $h.isEmpty(str) ? str : str.toString();
         }
     };
 
@@ -176,22 +179,26 @@
             $.ajax(settings);
         },
         createOption: function ($el, id, name, selected, options) {
-            var self = this, settings = {value: id, text: name}, selIds = [], sel = selected, idParam = self.idParam;
-            if (sel instanceof Array || sel instanceof Object) {
+            var self = this, settings = {value: id, text: name}, selIds = [], sel = selected, idParam = self.idParam,
+                pushId = function(str) { 
+                    var s = $h.toStr(str);
+                    if (s) {
+                        selIds.push(s);
+                    }
+                };
+            if (sel && (sel instanceof Array || sel instanceof Object)) {
                 $.each(sel, function (key, val) {
                     if (val instanceof Object) {
-                        if (val[idParam] !== undefined) {
-                            selIds.push(val[idParam]);
-                        }
+                        pushId(val[idParam]);
                     } else {
-                        selIds.push(val.toString());
+                        pushId(val);
                     }
                 });
             } else {
-                selIds = [sel.toString()];
+                pushId(sel);
             }
             $.extend(true, settings, (options || {}));
-            if (selIds.length && $.inArray(id.toString(), selIds) > -1) {
+            if (selIds.length && $.inArray($h.toStr(id), selIds) > -1) {
                 settings.selected = "selected";
             }
             $("<option/>", settings).appendTo($el);
