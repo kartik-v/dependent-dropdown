@@ -1,9 +1,9 @@
 Change Log: `dependent-dropdown`
 ================================
 
-## version 1.4.8 (_under development_)
+## version 1.4.8
 
-**Date:** 26-Jul-2017
+**Date:** 01-Aug-2017
 
 - (enh #69): Better `toString` parsing.
 
