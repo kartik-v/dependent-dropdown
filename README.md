@@ -1,5 +1,15 @@
-dependent-dropdown
-==================
+<h1 align="center">
+    <a href="http://plugins.krajee.com" title="Krajee Plugins" target="_blank">
+        <img src="http://kartik-v.github.io/bootstrap-fileinput-samples/samples/krajee-logo-b.png" alt="Krajee Logo"/>
+    </a>
+    <br>
+    dependent-dropdown
+    <hr>
+    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DTP3NZQ6G2AYU"
+       title="Donate via Paypal" target="_blank">
+        <img src="http://kartik-v.github.io/bootstrap-fileinput-samples/samples/donate.png" alt="Donate"/>
+    </a>
+</h1>
 
 [![BOWER version](https://badge-me.herokuapp.com/api/bower/kartik-v/dependent-dropdown.png)](http://badges.enytc.com/for/bower/kartik-v/dependent-dropdown)
 [![Latest Stable Version](https://poser.pugx.org/kartik-v/dependent-dropdown/v/stable)](https://packagist.org/packages/kartik-v/dependent-dropdown)
