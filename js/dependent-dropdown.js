@@ -213,7 +213,7 @@
                 data = {};
             }
             $.each(data, function (i, groups) {
-                if (groups[idParam]) {
+                if (groups[idParam].length !== 0) {
                     options = groups[self.optionsParam] || {};
                     self.createOption($select, groups[idParam], groups[nameParam], defVal, options);
                 } else {
