@@ -19,7 +19,7 @@
 
 A multi level dependent dropdown JQuery plugin that allows nested dependencies. The plugin allows you to convert normal select inputs, whose options are derived based on value selected in another input/or a group of inputs. It works both with normal select options and select with optgroups as well.
 
-> NOTE: The latest version of the plugin v1.4.8 has been released. Refer the [CHANGE LOG](https://github.com/kartik-v/dependent-dropdown/blob/master/CHANGE.md) for details.
+> NOTE: Refer the [CHANGE LOG](https://github.com/kartik-v/dependent-dropdown/blob/master/CHANGE.md) for details on updates to various releases.
 
 ## Features
 
@@ -80,6 +80,11 @@ View the [plugin documentation](http://plugins.krajee.com/dependent-dropdown) an
 You can use the `bower` package manager to install. Run:
 
     bower install dependent-dropdown
+
+### Using NPM
+To install using the `npm` package manager run:
+
+    npm install dependent-dropdown
 
 ### Using Composer
 You can use the `composer` package manager to install. Either run:
@@ -154,4 +159,4 @@ $("#child-2").depdrop({
 
 ## License
 
-**dependent-dropdown** is released under the BSD 3-Clause License. See the bundled `LICENSE.md` for details.
+**dependent-dropdown** is released under the BSD-3-Clause License. See the bundled `LICENSE.md` for details.

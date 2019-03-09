@@ -1,6 +1,15 @@
 Change Log: `dependent-dropdown`
 ================================
 
+## version 1.4.9
+
+**Date:** 09-Mar-2019
+
+- (enh #72): Correct validation for undefined groups idParam.
+- (enh #72): Add Hungarian Translations.
+- (enh #70): Add Portugese Translations.
+- Update README for NPM install and updates to copyright year.
+
 ## version 1.4.8
 
 **Date:** 01-Aug-2017

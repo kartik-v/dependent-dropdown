@@ -1,11 +1,11 @@
 /*!
- * dependent-dropdown v1.4.8
+ * dependent-dropdown v1.4.9
  * http://plugins.krajee.com/dependent-dropdown
  *
  * Author: Kartik Visweswaran
- * Copyright: 2014 - 2017, Kartik Visweswaran, Krajee.com
+ * Copyright: 2014 - 2019, Kartik Visweswaran, Krajee.com
  *
- * Licensed under the BSD 3-Clause
+ * Licensed under the BSD-3-Clause
  * https://github.com/kartik-v/dependent-dropdown/blob/master/LICENSE.md
  */
 (function (factory) {
@@ -213,7 +213,7 @@
                 data = {};
             }
             $.each(data, function (i, groups) {
-                if (groups[idParam]) {
+                if (!$h.isEmpty(groups[idParam])) {
                     options = groups[self.optionsParam] || {};
                     self.createOption($select, groups[idParam], groups[nameParam], defVal, options);
                 } else {
