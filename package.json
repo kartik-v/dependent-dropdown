@@ -6,8 +6,8 @@
         "Kartik Visweswaran <kartikv2@gmail.com>"
     ],
     "description": "A multi level dependent dropdown JQuery plugin that allows nested dependencies.",
-    "repository" : {
-        "type": "git", 
+    "repository": {
+        "type": "git",
         "url": "https://github.com/kartik-v/dependent-dropdown.git"
     },
     "bugs": {
@@ -20,12 +20,20 @@
         "select"
     ],
     "dependencies": {
-        "jquery": ">= 1.9.0"
+        "jquery": ">= 1.9.0",
+        "opencollective-postinstall": "^2.0.2"
     },
     "main": "./js/dependent-dropdown.js",
     "style": "./css/dependent-dropdown.css",
     "peerDependencies": {
         "jquery": ">= 1.9.0"
     },
-    "license": "BSD-3-Clause"
+    "license": "BSD-3-Clause",
+    "collective": {
+        "type": "opencollective",
+        "url": "https://opencollective.com/dependent-dropdown"
+    },
+    "scripts": {
+        "postinstall": "opencollective-postinstall || true"
+    }
 }
