@@ -11,7 +11,7 @@
     </a>
 </h1>
 
-[![BOWER version](https://badge-me.herokuapp.com/api/bower/kartik-v/dependent-dropdown.png)](http://badges.enytc.com/for/bower/kartik-v/dependent-dropdown)
+[![Financial Contributors on Open Collective](https://opencollective.com/dependent-dropdown/all/badge.svg?label=financial+contributors)](https://opencollective.com/dependent-dropdown) [![BOWER version](https://badge-me.herokuapp.com/api/bower/kartik-v/dependent-dropdown.png)](http://badges.enytc.com/for/bower/kartik-v/dependent-dropdown)
 [![Latest Stable Version](https://poser.pugx.org/kartik-v/dependent-dropdown/v/stable)](https://packagist.org/packages/kartik-v/dependent-dropdown)
 [![License](https://poser.pugx.org/kartik-v/dependent-dropdown/license)](https://packagist.org/packages/kartik-v/dependent-dropdown)
 [![Packagist Downloads](https://poser.pugx.org/kartik-v/dependent-dropdown/downloads)](https://packagist.org/packages/kartik-v/dependent-dropdown)
@@ -156,6 +156,36 @@ $("#child-2").depdrop({
 });
 
 ```
+
+## Contributors
+
+### Code Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="https://github.com/kartik-v/dependent-dropdown/graphs/contributors"><img src="https://opencollective.com/dependent-dropdown/contributors.svg?width=890&button=false" /></a>
+
+### Financial Contributors
+
+Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/dependent-dropdown/contribute)]
+
+#### Individuals
+
+<a href="https://opencollective.com/dependent-dropdown"><img src="https://opencollective.com/dependent-dropdown/individuals.svg?width=890"></a>
+
+#### Organizations
+
+Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/dependent-dropdown/contribute)]
+
+<a href="https://opencollective.com/dependent-dropdown/organization/0/website"><img src="https://opencollective.com/dependent-dropdown/organization/0/avatar.svg"></a>
+<a href="https://opencollective.com/dependent-dropdown/organization/1/website"><img src="https://opencollective.com/dependent-dropdown/organization/1/avatar.svg"></a>
+<a href="https://opencollective.com/dependent-dropdown/organization/2/website"><img src="https://opencollective.com/dependent-dropdown/organization/2/avatar.svg"></a>
+<a href="https://opencollective.com/dependent-dropdown/organization/3/website"><img src="https://opencollective.com/dependent-dropdown/organization/3/avatar.svg"></a>
+<a href="https://opencollective.com/dependent-dropdown/organization/4/website"><img src="https://opencollective.com/dependent-dropdown/organization/4/avatar.svg"></a>
+<a href="https://opencollective.com/dependent-dropdown/organization/5/website"><img src="https://opencollective.com/dependent-dropdown/organization/5/avatar.svg"></a>
+<a href="https://opencollective.com/dependent-dropdown/organization/6/website"><img src="https://opencollective.com/dependent-dropdown/organization/6/avatar.svg"></a>
+<a href="https://opencollective.com/dependent-dropdown/organization/7/website"><img src="https://opencollective.com/dependent-dropdown/organization/7/avatar.svg"></a>
+<a href="https://opencollective.com/dependent-dropdown/organization/8/website"><img src="https://opencollective.com/dependent-dropdown/organization/8/avatar.svg"></a>
+<a href="https://opencollective.com/dependent-dropdown/organization/9/website"><img src="https://opencollective.com/dependent-dropdown/organization/9/avatar.svg"></a>
 
 ## License
 
