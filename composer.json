@@ -1,5 +1,5 @@
 {
-    "name": "kartik-v/dependent-dropdown",
+    "name": "diginova/kartik-dependent-dropdown",
     "description": "A multi level dependent dropdown JQuery plugin that allows nested dependencies.",
     "keywords": ["jquery", "dependent", "dropdown", "select", "option"],
     "homepage": "https://github.com/kartik-v/dependent-dropdown",
