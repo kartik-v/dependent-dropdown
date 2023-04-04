@@ -74,6 +74,7 @@
                 .data('loadingClass', self.loadingClass)
                 .data('loadingText', self.loadingText)
                 .data('emptyMsg', self.emptyMsg)
+                .data('csrfParam', self.csrfParam)
                 .data('params', self.params);
         },
         init: function () {
@@ -123,15 +124,18 @@
             self.ajaxResults = {};
             ajaxData[self.parentParam] = vVal;
             if (!$h.isEmpty(vPar)) {
-                for (i = 0; i < vPar.length; i++) {
-                    key = vPar[i];
-                    val = $('#' + vPar[i]).val();
-                    params[i] = val;
-                    paramsOther[key] = val;
+                for (var key in vPar) {
+                    if (vPar.hasOwnProperty(key)) {
+                        val = vPar[key];
+                        params[key] = val;
+                        paramsOther[vPar[key]] = val;
+                    }
                 }
+
                 ajaxData[self.otherParam] = params;
             }
             ajaxData[self.allParam] = $.extend(true, {}, paramsMain, paramsOther);
+            ajaxData['_csrf-web'] = $el.data('csrfParam');
             settings = {
                 url: vUrl,
                 type: 'post',
