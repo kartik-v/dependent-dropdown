@@ -74,7 +74,8 @@
                 .data('loadingClass', self.loadingClass)
                 .data('loadingText', self.loadingText)
                 .data('emptyMsg', self.emptyMsg)
-                .data('params', self.params);
+                .data('params', self.params)
+                .data('paramsBase', self.paramsBase);
         },
         init: function () {
             var self = this, i, depends = self.depends, $el = self.$element, len = depends.length,
@@ -119,18 +120,30 @@
             var self = this, selected, optCount = 0, params = {}, settings, i, ajaxData = {}, vUrl = $el.data('url'),
                 paramsMain = $h.setParams(vDep, vVal), paramsOther = {}, key, val, vDefault = $el.data('placeholder'),
                 vLoad = $el.data('loading'), vLoadCss = $el.data('loadingClass'), vLoadMsg = $el.data('loadingText'),
-                vNullMsg = $el.data('emptyMsg'), vPar = $el.data('params');
+                vNullMsg = $el.data('emptyMsg'), vPar = $el.data('params'), vBase = $el.data('paramsBase');
             self.ajaxResults = {};
             ajaxData[self.parentParam] = vVal;
             if (!$h.isEmpty(vPar)) {
-                for (i = 0; i < vPar.length; i++) {
-                    key = vPar[i];
-                    val = $('#' + vPar[i]).val();
-                    params[i] = val;
-                    paramsOther[key] = val;
+                for (var key in vPar) {
+                    if (vPar.hasOwnProperty(key)) {
+                        val = vPar[key];
+                        params[key] = val;
+                        paramsOther[vPar[key]] = val;
+                    }
                 }
+
                 ajaxData[self.otherParam] = params;
             }
+
+            if (!$h.isEmpty(vBase)) {
+                for (var key in vBase) {
+                    if (vBase.hasOwnProperty(key)) {
+                        val = vBase[key];
+                        ajaxData[key] = val;
+                    }
+                }
+            }
+
             ajaxData[self.allParam] = $.extend(true, {}, paramsMain, paramsOther);
             settings = {
                 url: vUrl,
